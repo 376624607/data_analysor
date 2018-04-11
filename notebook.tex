@@ -1,0 +1,1523 @@
+
+% Default to the notebook output style
+
+    
+
+
+% Inherit from the specified cell style.
+
+
+
+
+    
+\documentclass[11pt]{article}
+
+    
+    
+    \usepackage[T1]{fontenc}
+    % Nicer default font (+ math font) than Computer Modern for most use cases
+    \usepackage{mathpazo}
+
+    % Basic figure setup, for now with no caption control since it's done
+    % automatically by Pandoc (which extracts ![](path) syntax from Markdown).
+    \usepackage{graphicx}
+    % We will generate all images so they have a width \maxwidth. This means
+    % that they will get their normal width if they fit onto the page, but
+    % are scaled down if they would overflow the margins.
+    \makeatletter
+    \def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth
+    \else\Gin@nat@width\fi}
+    \makeatother
+    \let\Oldincludegraphics\includegraphics
+    % Set max figure width to be 80% of text width, for now hardcoded.
+    \renewcommand{\includegraphics}[1]{\Oldincludegraphics[width=.8\maxwidth]{#1}}
+    % Ensure that by default, figures have no caption (until we provide a
+    % proper Figure object with a Caption API and a way to capture that
+    % in the conversion process - todo).
+    \usepackage{caption}
+    \DeclareCaptionLabelFormat{nolabel}{}
+    \captionsetup{labelformat=nolabel}
+
+    \usepackage{adjustbox} % Used to constrain images to a maximum size 
+    \usepackage{xcolor} % Allow colors to be defined
+    \usepackage{enumerate} % Needed for markdown enumerations to work
+    \usepackage{geometry} % Used to adjust the document margins
+    \usepackage{amsmath} % Equations
+    \usepackage{amssymb} % Equations
+    \usepackage{textcomp} % defines textquotesingle
+    % Hack from http://tex.stackexchange.com/a/47451/13684:
+    \AtBeginDocument{%
+        \def\PYZsq{\textquotesingle}% Upright quotes in Pygmentized code
+    }
+    \usepackage{upquote} % Upright quotes for verbatim code
+    \usepackage{eurosym} % defines \euro
+    \usepackage[mathletters]{ucs} % Extended unicode (utf-8) support
+    \usepackage[utf8x]{inputenc} % Allow utf-8 characters in the tex document
+    \usepackage{fancyvrb} % verbatim replacement that allows latex
+    \usepackage{grffile} % extends the file name processing of package graphics 
+                         % to support a larger range 
+    % The hyperref package gives us a pdf with properly built
+    % internal navigation ('pdf bookmarks' for the table of contents,
+    % internal cross-reference links, web links for URLs, etc.)
+    \usepackage{hyperref}
+    \usepackage{longtable} % longtable support required by pandoc >1.10
+    \usepackage{booktabs}  % table support for pandoc > 1.12.2
+    \usepackage[inline]{enumitem} % IRkernel/repr support (it uses the enumerate* environment)
+    \usepackage[normalem]{ulem} % ulem is needed to support strikethroughs (\sout)
+                                % normalem makes italics be italics, not underlines
+    
+
+    
+    
+    % Colors for the hyperref package
+    \definecolor{urlcolor}{rgb}{0,.145,.698}
+    \definecolor{linkcolor}{rgb}{.71,0.21,0.01}
+    \definecolor{citecolor}{rgb}{.12,.54,.11}
+
+    % ANSI colors
+    \definecolor{ansi-black}{HTML}{3E424D}
+    \definecolor{ansi-black-intense}{HTML}{282C36}
+    \definecolor{ansi-red}{HTML}{E75C58}
+    \definecolor{ansi-red-intense}{HTML}{B22B31}
+    \definecolor{ansi-green}{HTML}{00A250}
+    \definecolor{ansi-green-intense}{HTML}{007427}
+    \definecolor{ansi-yellow}{HTML}{DDB62B}
+    \definecolor{ansi-yellow-intense}{HTML}{B27D12}
+    \definecolor{ansi-blue}{HTML}{208FFB}
+    \definecolor{ansi-blue-intense}{HTML}{0065CA}
+    \definecolor{ansi-magenta}{HTML}{D160C4}
+    \definecolor{ansi-magenta-intense}{HTML}{A03196}
+    \definecolor{ansi-cyan}{HTML}{60C6C8}
+    \definecolor{ansi-cyan-intense}{HTML}{258F8F}
+    \definecolor{ansi-white}{HTML}{C5C1B4}
+    \definecolor{ansi-white-intense}{HTML}{A1A6B2}
+
+    % commands and environments needed by pandoc snippets
+    % extracted from the output of `pandoc -s`
+    \providecommand{\tightlist}{%
+      \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+    \DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+    % Add ',fontsize=\small' for more characters per line
+    \newenvironment{Shaded}{}{}
+    \newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.56,0.13,0.00}{{#1}}}
+    \newcommand{\DecValTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\FloatTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\CharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\StringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\CommentTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textit{{#1}}}}
+    \newcommand{\OtherTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{{#1}}}
+    \newcommand{\AlertTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.02,0.16,0.49}{{#1}}}
+    \newcommand{\RegionMarkerTok}[1]{{#1}}
+    \newcommand{\ErrorTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\NormalTok}[1]{{#1}}
+    
+    % Additional commands for more recent versions of Pandoc
+    \newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.53,0.00,0.00}{{#1}}}
+    \newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.73,0.40,0.53}{{#1}}}
+    \newcommand{\ImportTok}[1]{{#1}}
+    \newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.73,0.13,0.13}{\textit{{#1}}}}
+    \newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\VariableTok}[1]{\textcolor[rgb]{0.10,0.09,0.49}{{#1}}}
+    \newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.40,0.40,0.40}{{#1}}}
+    \newcommand{\BuiltInTok}[1]{{#1}}
+    \newcommand{\ExtensionTok}[1]{{#1}}
+    \newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.74,0.48,0.00}{{#1}}}
+    \newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.49,0.56,0.16}{{#1}}}
+    \newcommand{\InformationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\WarningTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    
+    
+    % Define a nice break command that doesn't care if a line doesn't already
+    % exist.
+    \def\br{\hspace*{\fill} \\* }
+    % Math Jax compatability definitions
+    \def\gt{>}
+    \def\lt{<}
+    % Document parameters
+    \title{project4}
+    
+    
+    
+
+    % Pygments definitions
+    
+\makeatletter
+\def\PY@reset{\let\PY@it=\relax \let\PY@bf=\relax%
+    \let\PY@ul=\relax \let\PY@tc=\relax%
+    \let\PY@bc=\relax \let\PY@ff=\relax}
+\def\PY@tok#1{\csname PY@tok@#1\endcsname}
+\def\PY@toks#1+{\ifx\relax#1\empty\else%
+    \PY@tok{#1}\expandafter\PY@toks\fi}
+\def\PY@do#1{\PY@bc{\PY@tc{\PY@ul{%
+    \PY@it{\PY@bf{\PY@ff{#1}}}}}}}
+\def\PY#1#2{\PY@reset\PY@toks#1+\relax+\PY@do{#2}}
+
+\expandafter\def\csname PY@tok@w\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.73,0.73}{##1}}}
+\expandafter\def\csname PY@tok@c\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.74,0.48,0.00}{##1}}}
+\expandafter\def\csname PY@tok@k\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.69,0.00,0.25}{##1}}}
+\expandafter\def\csname PY@tok@o\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ow\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@ne\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.82,0.25,0.23}{##1}}}
+\expandafter\def\csname PY@tok@nv\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@no\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ni\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.60,0.60,0.60}{##1}}}
+\expandafter\def\csname PY@tok@na\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.49,0.56,0.16}{##1}}}
+\expandafter\def\csname PY@tok@nt\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@s\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sd\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@si\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@se\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sr\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@ss\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sx\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@m\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@gh\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gu\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.50,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gr\endcsname{\def\PY@tc##1{\textcolor[rgb]{1.00,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ge\endcsname{\let\PY@it=\textit}
+\expandafter\def\csname PY@tok@gs\endcsname{\let\PY@bf=\textbf}
+\expandafter\def\csname PY@tok@gp\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@go\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.53,0.53}{##1}}}
+\expandafter\def\csname PY@tok@gt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.27,0.87}{##1}}}
+\expandafter\def\csname PY@tok@err\endcsname{\def\PY@bc##1{\setlength{\fboxsep}{0pt}\fcolorbox[rgb]{1.00,0.00,0.00}{1,1,1}{\strut ##1}}}
+\expandafter\def\csname PY@tok@kc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kd\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kr\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@bp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@fm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@vc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vg\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sa\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@dl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s2\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s1\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@mb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@il\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mo\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ch\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cm\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cpf\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@c1\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cs\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+
+\def\PYZbs{\char`\\}
+\def\PYZus{\char`\_}
+\def\PYZob{\char`\{}
+\def\PYZcb{\char`\}}
+\def\PYZca{\char`\^}
+\def\PYZam{\char`\&}
+\def\PYZlt{\char`\<}
+\def\PYZgt{\char`\>}
+\def\PYZsh{\char`\#}
+\def\PYZpc{\char`\%}
+\def\PYZdl{\char`\$}
+\def\PYZhy{\char`\-}
+\def\PYZsq{\char`\'}
+\def\PYZdq{\char`\"}
+\def\PYZti{\char`\~}
+% for compatibility with earlier versions
+\def\PYZat{@}
+\def\PYZlb{[}
+\def\PYZrb{]}
+\makeatother
+
+
+    % Exact colors from NB
+    \definecolor{incolor}{rgb}{0.0, 0.0, 0.5}
+    \definecolor{outcolor}{rgb}{0.545, 0.0, 0.0}
+
+
+
+    
+    % Prevent overflowing lines due to hard-to-break entities
+    \sloppy 
+    % Setup hyperref package
+    \hypersetup{
+      breaklinks=true,  % so long urls are correctly broken across lines
+      colorlinks=true,
+      urlcolor=urlcolor,
+      linkcolor=linkcolor,
+      citecolor=citecolor,
+      }
+    % Slightly bigger margins than the latex defaults
+    
+    \geometry{verbose,tmargin=1in,bmargin=1in,lmargin=1in,rmargin=1in}
+    
+    
+
+    \begin{document}
+    
+    
+    \maketitle
+    
+    
+
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}39}]:} \PY{l+s+sd}{\PYZsq{}\PYZsq{}\PYZsq{}}
+         \PY{l+s+sd}{【项目04】  视频网站数据清洗整理和结论研究}
+         
+         \PY{l+s+sd}{作业要求：}
+         \PY{l+s+sd}{1、数据清洗 \PYZhy{} 去除空值}
+         \PY{l+s+sd}{要求：创建函数}
+         \PY{l+s+sd}{提示：fillna方法填充缺失数据，注意inplace参数}
+         
+         \PY{l+s+sd}{2、数据清洗 \PYZhy{} 时间标签转化}
+         \PY{l+s+sd}{要求：}
+         \PY{l+s+sd}{① 将时间字段改为时间标签}
+         \PY{l+s+sd}{② 创建函数}
+         \PY{l+s+sd}{提示：}
+         \PY{l+s+sd}{需要将中文日期转化为非中文日期，例如 2016年5月24日 → 2016.5.24}
+         
+         \PY{l+s+sd}{3、问题1 分析出不同导演电影的好评率，并筛选出TOP20}
+         \PY{l+s+sd}{要求：}
+         \PY{l+s+sd}{① 计算统计出不同导演的好评率，不要求创建函数}
+         \PY{l+s+sd}{② 通过多系列柱状图，做图表可视化}
+         \PY{l+s+sd}{提示：}
+         \PY{l+s+sd}{① 好评率 = 好评数 / 评分人数}
+         \PY{l+s+sd}{② 可自己设定图表风格}
+         
+         \PY{l+s+sd}{4、问题2 统计分析2001\PYZhy{}2016年每年评影人数总量}
+         \PY{l+s+sd}{要求：}
+         \PY{l+s+sd}{① 计算统计出2001\PYZhy{}2016年每年评影人数总量，不要求创建函数}
+         \PY{l+s+sd}{② 通过面积图，做图表可视化，分析每年人数总量变化规律}
+         \PY{l+s+sd}{③ 验证是否有异常值（极度异常）}
+         \PY{l+s+sd}{④ 创建函数分析出数据外限最大最小值）}
+         \PY{l+s+sd}{⑤ 筛选查看异常值 → 是否异常值就是每年的热门电影？}
+         \PY{l+s+sd}{提示：}
+         \PY{l+s+sd}{① 通过箱型图验证异常值情况}
+         \PY{l+s+sd}{② 通过quantile(q=0.5)方法，得到四分位数}
+         \PY{l+s+sd}{③ IQR=Q3\PYZhy{}Q1}
+         \PY{l+s+sd}{④ 外限：最大值区间Q3+3IQR,最小值区间Q1\PYZhy{}3IQR （IQR=Q3\PYZhy{}Q1）}
+         \PY{l+s+sd}{⑤ 可自己设定图表风格}
+         
+         \PY{l+s+sd}{\PYZsq{}\PYZsq{}\PYZsq{}}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}39}]:} '\textbackslash{}n【项目04】  视频网站数据清洗整理和结论研究\textbackslash{}n\textbackslash{}n作业要求：\textbackslash{}n1、数据清洗 - 去除空值\textbackslash{}n要求：创建函数\textbackslash{}n提示：fillna方法填充缺失数据，注意inplace参数\textbackslash{}n\textbackslash{}n2、数据清洗 - 时间标签转化\textbackslash{}n要求：\textbackslash{}n① 将时间字段改为时间标签\textbackslash{}n② 创建函数\textbackslash{}n提示：\textbackslash{}n需要将中文日期转化为非中文日期，例如 2016年5月24日 → 2016.5.24\textbackslash{}n\textbackslash{}n3、问题1 分析出不同导演电影的好评率，并筛选出TOP20\textbackslash{}n要求：\textbackslash{}n① 计算统计出不同导演的好评率，不要求创建函数\textbackslash{}n② 通过多系列柱状图，做图表可视化\textbackslash{}n提示：\textbackslash{}n① 好评率 = 好评数 / 评分人数\textbackslash{}n② 可自己设定图表风格\textbackslash{}n\textbackslash{}n4、问题2 统计分析2001-2016年每年评影人数总量\textbackslash{}n要求：\textbackslash{}n① 计算统计出2001-2016年每年评影人数总量，不要求创建函数\textbackslash{}n② 通过面积图，做图表可视化，分析每年人数总量变化规律\textbackslash{}n③ 验证是否有异常值（极度异常）\textbackslash{}n④ 创建函数分析出数据外限最大最小值）\textbackslash{}n⑤ 筛选查看异常值 → 是否异常值就是每年的热门电影？\textbackslash{}n提示：\textbackslash{}n① 通过箱型图验证异常值情况\textbackslash{}n② 通过quantile(q=0.5)方法，得到四分位数\textbackslash{}n③ IQR=Q3-Q1\textbackslash{}n④ 外限：最大值区间Q3+3IQR,最小值区间Q1-3IQR （IQR=Q3-Q1）\textbackslash{}n⑤ 可自己设定图表风格\textbackslash{}n\textbackslash{}n'
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}113}]:} \PY{k+kn}{import} \PY{n+nn}{os}
+          \PY{n}{os}\PY{o}{.}\PY{n}{listdir}\PY{p}{(}\PY{p}{)}
+          
+          \PY{k+kn}{import} \PY{n+nn}{numpy} \PY{k}{as} \PY{n+nn}{np}
+          \PY{k+kn}{import} \PY{n+nn}{pandas} \PY{k}{as} \PY{n+nn}{pd}
+          \PY{k+kn}{import} \PY{n+nn}{matplotlib}\PY{n+nn}{.}\PY{n+nn}{pyplot} \PY{k}{as} \PY{n+nn}{plt}
+          
+          \PY{n}{aqy\PYZus{}dat}\PY{o}{=}\PY{n}{pd}\PY{o}{.}\PY{n}{read\PYZus{}csv}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{爱奇艺视频数据.csv}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{n}{engine}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{python}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+          \PY{n+nb}{print}\PY{p}{(}\PY{n}{aqy\PYZus{}dat}\PY{o}{.}\PY{n}{head}\PY{p}{(}\PY{p}{)}\PY{p}{)}
+          
+          \PY{n}{aqy\PYZus{}dat}\PY{o}{.}\PY{n}{info}\PY{p}{(}\PY{p}{)}
+          
+          \PY{n}{aqy\PYZus{}dat}\PY{o}{.}\PY{n}{describe}\PY{p}{(}\PY{p}{)}
+          
+          \PY{l+s+sd}{\PYZsq{}\PYZsq{}\PYZsq{}1、数据清洗 \PYZhy{} 去除空值}
+          \PY{l+s+sd}{要求：创建函数}
+          \PY{l+s+sd}{提示：fillna方法填充缺失数据，注意inplace参数}
+          \PY{l+s+sd}{\PYZsq{}\PYZsq{}\PYZsq{}}
+          \PY{k}{def} \PY{n+nf}{removeNan}\PY{p}{(}\PY{n}{df}\PY{p}{)}\PY{p}{:}
+              \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n}{df}\PY{o}{.}\PY{n}{columns}\PY{p}{:}
+                  \PY{k}{if} \PY{n}{df}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{o}{.}\PY{n}{dtype}\PY{o}{==}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{object}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:}
+                      \PY{n}{df}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{o}{.}\PY{n}{fillna}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{缺失数据}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{n}{inplace}\PY{o}{=}\PY{k+kc}{True}\PY{p}{)}
+                  \PY{k}{else}\PY{p}{:}
+                      \PY{n}{df}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{o}{.}\PY{n}{fillna}\PY{p}{(}\PY{l+m+mf}{0.0}\PY{p}{,}\PY{n}{inplace}\PY{o}{=}\PY{k+kc}{True}\PY{p}{)}
+              \PY{k}{return} \PY{n}{df}
+          \PY{n}{new\PYZus{}dat}\PY{o}{=}\PY{n}{removeNan}\PY{p}{(}\PY{n}{aqy\PYZus{}dat}\PY{p}{)}
+          \PY{n+nb}{print}\PY{p}{(}\PY{n}{new\PYZus{}dat}\PY{p}{)}
+          
+          \PY{l+s+sd}{\PYZsq{}\PYZsq{}\PYZsq{}2、数据清洗 \PYZhy{} 时间标签转化}
+          \PY{l+s+sd}{要求：}
+          \PY{l+s+sd}{① 将时间字段改为时间标签}
+          \PY{l+s+sd}{② 创建函数}
+          \PY{l+s+sd}{提示：}
+          \PY{l+s+sd}{需要将中文日期转化为非中文日期，例如 2016年5月24日 → 2016.5.24}
+          \PY{l+s+sd}{\PYZsq{}\PYZsq{}\PYZsq{}}
+          \PY{k}{def} \PY{n+nf}{convertDate}\PY{p}{(}\PY{n}{df}\PY{p}{,}\PY{o}{*}\PY{n}{cols}\PY{p}{)}\PY{p}{:}
+              \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n}{cols}\PY{p}{:}
+                  \PY{c+c1}{\PYZsh{}注意此处必须在replace后赋值，再进行下一个replace，否则会无效果}
+                  \PY{n}{df}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{o}{=}\PY{n}{df}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{o}{.}\PY{n}{str}\PY{o}{.}\PY{n}{replace}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{年}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{.}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+                  \PY{n}{df}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{o}{=}\PY{n}{df}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{o}{.}\PY{n}{str}\PY{o}{.}\PY{n}{replace}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{月}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{.}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+                  \PY{n}{df}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{o}{=}\PY{n}{df}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{o}{.}\PY{n}{str}\PY{o}{.}\PY{n}{replace}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{日}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+                  \PY{n}{df}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{o}{=}\PY{n}{pd}\PY{o}{.}\PY{n}{to\PYZus{}datetime}\PY{p}{(}\PY{n}{df}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{)}
+              \PY{k}{return} \PY{n}{df}
+          \PY{n}{new\PYZus{}convert\PYZus{}dat}\PY{o}{=}\PY{n}{convertDate}\PY{p}{(}\PY{n}{new\PYZus{}dat}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{数据获取日期}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+          \PY{n+nb}{print}\PY{p}{(}\PY{n}{new\PYZus{}convert\PYZus{}dat}\PY{p}{)}
+          
+          \PY{l+s+sd}{\PYZsq{}\PYZsq{}\PYZsq{}}
+          \PY{l+s+sd}{3、问题1 分析出不同导演电影的好评率，并筛选出TOP20}
+          \PY{l+s+sd}{要求：}
+          \PY{l+s+sd}{① 计算统计出不同导演的好评率，不要求创建函数}
+          \PY{l+s+sd}{② 通过多系列柱状图，做图表可视化}
+          \PY{l+s+sd}{提示：}
+          \PY{l+s+sd}{① 好评率 = 好评数 / 评分人数}
+          \PY{l+s+sd}{② 可自己设定图表风格}
+          \PY{l+s+sd}{\PYZsq{}\PYZsq{}\PYZsq{}}
+          
+          \PY{n}{df\PYZus{}good\PYZus{}rate}\PY{o}{=}\PY{n}{new\PYZus{}convert\PYZus{}dat}\PY{p}{[}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{导演}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{好评数}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{评分人数}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{]}
+          \PY{n}{df\PYZus{}good\PYZus{}rate}
+          
+          \PY{n}{df1}\PY{o}{=}\PY{n}{df\PYZus{}good\PYZus{}rate}\PY{o}{.}\PY{n}{groupby}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{导演}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{[}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{好评数}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{评分人数}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{]}\PY{o}{.}\PY{n}{sum}\PY{p}{(}\PY{p}{)}
+          \PY{n}{df1}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{好评率}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{=}\PY{n}{df1}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{好评数}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{/}\PY{n}{df1}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{评分人数}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+          \PY{n}{df1}\PY{o}{=}\PY{n}{df1}\PY{o}{.}\PY{n}{sort\PYZus{}values}\PY{p}{(}\PY{n}{by}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{好评率}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{n}{ascending}\PY{o}{=}\PY{k+kc}{False}\PY{p}{)}\PY{p}{[}\PY{p}{:}\PY{l+m+mi}{25}\PY{p}{]}
+          
+          \PY{c+c1}{\PYZsh{}解决标签乱码问题}
+          \PY{n}{plt}\PY{o}{.}\PY{n}{rcParams}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{font.sans\PYZhy{}serif}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{=}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{SimHei}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+          \PY{n}{plt}\PY{o}{.}\PY{n}{rcParams}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{axes.unicode\PYZus{}minus}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{=}\PY{k+kc}{False}
+          \PY{n}{plt}\PY{o}{.}\PY{n}{figure}\PY{p}{(}\PY{n}{figsize}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{12}\PY{p}{,}\PY{l+m+mi}{5}\PY{p}{)}\PY{p}{)}
+          \PY{n}{df1}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{好评率}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{plot}\PY{o}{.}\PY{n}{bar}\PY{p}{(}\PY{n}{rot}\PY{o}{=}\PY{l+m+mi}{60}\PY{p}{,}\PY{n}{label}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{好评率}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{n}{ylim}\PY{o}{=}\PY{p}{[}\PY{l+m+mf}{0.98}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{)}
+          \PY{n}{plt}\PY{o}{.}\PY{n}{legend}\PY{p}{(}\PY{p}{)}
+          
+          \PY{l+s+sd}{\PYZsq{}\PYZsq{}\PYZsq{}4、问题2 统计分析2001\PYZhy{}2016年每年评影人数总量}
+          \PY{l+s+sd}{要求：}
+          \PY{l+s+sd}{① 计算统计出2001\PYZhy{}2016年每年评影人数总量，不要求创建函数}
+          \PY{l+s+sd}{② 通过面积图，做图表可视化，分析每年人数总量变化规律}
+          \PY{l+s+sd}{③ 验证是否有异常值（极度异常）}
+          \PY{l+s+sd}{④ 创建函数分析出数据外限最大最小值）}
+          \PY{l+s+sd}{⑤ 筛选查看异常值 → 是否异常值就是每年的热门电影？}
+          \PY{l+s+sd}{提示：}
+          \PY{l+s+sd}{① 通过箱型图验证异常值情况}
+          \PY{l+s+sd}{② 通过quantile(q=0.5)方法，得到四分位数}
+          \PY{l+s+sd}{③ IQR=Q3\PYZhy{}Q1}
+          \PY{l+s+sd}{④ 外限：最大值区间Q3+3IQR,最小值区间Q1\PYZhy{}3IQR （IQR=Q3\PYZhy{}Q1）}
+          \PY{l+s+sd}{⑤ 可自己设定图表风格}
+          \PY{l+s+sd}{\PYZsq{}\PYZsq{}\PYZsq{}}
+          
+          
+          \PY{c+c1}{\PYZsh{}因为统计数据中有重复值存在，要先去重：比如同一部电视剧，不能将每集的人数都相加,如下所示}
+          
+          \PY{n}{df2}\PY{o}{=}\PY{n}{new\PYZus{}convert\PYZus{}dat}\PY{p}{[}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{导演}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{上映年份}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{整理后剧名}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{]}
+          \PY{n}{df2}\PY{o}{.}\PY{n}{sort\PYZus{}values}\PY{p}{(}\PY{n}{by}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{导演}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{n}{ascending}\PY{o}{=}\PY{k+kc}{True}\PY{p}{)}
+          
+          \PY{n}{df2}\PY{o}{=}\PY{n}{df2}\PY{o}{.}\PY{n}{drop\PYZus{}duplicates}\PY{p}{(}\PY{p}{)}
+          
+          \PY{c+c1}{\PYZsh{}筛选出不同（导演，上映年份，整理后剧名）的唯一值数据，方便后续merge操作}
+          \PY{n}{df3}\PY{o}{=}\PY{n}{df2}\PY{o}{.}\PY{n}{sort\PYZus{}values}\PY{p}{(}\PY{n}{by}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{导演}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{n}{ascending}\PY{o}{=}\PY{k+kc}{True}\PY{p}{)}
+          \PY{n}{df3}\PY{o}{=}\PY{n}{df3}\PY{p}{[}\PY{n}{df3}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{上映年份}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{!=}\PY{l+m+mi}{0}\PY{p}{]}
+          \PY{n}{df3}\PY{o}{=}\PY{n}{df3}\PY{p}{[}\PY{n}{df3}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{导演}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{!=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{缺失数据}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+          \PY{n+nb}{print}\PY{p}{(}\PY{n}{df3}\PY{o}{.}\PY{n}{head}\PY{p}{(}\PY{p}{)}\PY{p}{)}
+          
+          \PY{n}{df4}\PY{o}{=}\PY{n}{new\PYZus{}convert\PYZus{}dat}\PY{o}{.}\PY{n}{groupby}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{整理后剧名}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{o}{.}\PY{n}{sum}\PY{p}{(}\PY{p}{)}\PY{p}{[}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{好评数}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{评分人数}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{]}
+          \PY{n}{df4}
+          
+          \PY{n}{merge\PYZus{}dat}\PY{o}{=}\PY{n}{pd}\PY{o}{.}\PY{n}{merge}\PY{p}{(}\PY{n}{df3}\PY{p}{,}\PY{n}{df4}\PY{p}{,}\PY{n}{left\PYZus{}on}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{整理后剧名}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{n}{right\PYZus{}index}\PY{o}{=}\PY{k+kc}{True}\PY{p}{)}
+          
+          \PY{n}{merge\PYZus{}dat}
+          
+          \PY{c+c1}{\PYZsh{}按照上映年份分组}
+          \PY{n}{res\PYZus{}dat}\PY{o}{=}\PY{n}{merge\PYZus{}dat}\PY{o}{.}\PY{n}{groupby}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{上映年份}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{o}{.}\PY{n}{sum}\PY{p}{(}\PY{p}{)}\PY{p}{[}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{评分人数}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{好评数}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{]}
+          \PY{n+nb}{print}\PY{p}{(}\PY{n}{res\PYZus{}dat}\PY{o}{.}\PY{n}{head}\PY{p}{(}\PY{p}{)}\PY{p}{)}
+          
+          \PY{c+c1}{\PYZsh{}按照评分人数作面积图}
+          \PY{n}{plt}\PY{o}{.}\PY{n}{figure}\PY{p}{(}\PY{n}{num}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{,}\PY{n}{figsize}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{12}\PY{p}{,}\PY{l+m+mi}{4}\PY{p}{)}\PY{p}{)}
+          \PY{n}{res\PYZus{}dat}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{评分人数}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{loc}\PY{p}{[}\PY{l+m+mi}{2000}\PY{p}{:}\PY{p}{]}\PY{o}{.}\PY{n}{plot}\PY{o}{.}\PY{n}{area}\PY{p}{(}\PY{n}{alpha}\PY{o}{=}\PY{l+m+mf}{0.6}\PY{p}{,}\PY{n}{label}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{2001\PYZhy{}2016年评分人数统计}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+          \PY{n}{plt}\PY{o}{.}\PY{n}{legend}\PY{p}{(}\PY{p}{)}
+          \PY{n}{plt}\PY{o}{.}\PY{n}{xticks}\PY{p}{(}\PY{p}{[}\PY{n}{i} \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{2001}\PY{p}{,}\PY{l+m+mi}{2017}\PY{p}{)}\PY{p}{]}\PY{p}{)}
+          
+          \PY{c+c1}{\PYZsh{}通过箱线图判断异常值}
+          \PY{n}{fig}\PY{p}{,}\PY{n}{axes}\PY{o}{=}\PY{n}{plt}\PY{o}{.}\PY{n}{subplots}\PY{p}{(}\PY{l+m+mi}{4}\PY{p}{,}\PY{l+m+mi}{4}\PY{p}{,}\PY{n}{figsize}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{10}\PY{p}{,}\PY{l+m+mi}{16}\PY{p}{)}\PY{p}{)}
+          \PY{n}{start}\PY{o}{=}\PY{l+m+mi}{2001}
+          \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{4}\PY{p}{)}\PY{p}{:}
+              \PY{k}{for} \PY{n}{j} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{4}\PY{p}{)}\PY{p}{:}
+                  \PY{n}{data}\PY{o}{=}\PY{n}{merge\PYZus{}dat}\PY{p}{[}\PY{n}{merge\PYZus{}dat}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{上映年份}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{==}\PY{n}{start}\PY{p}{]}
+                  \PY{n}{data}\PY{p}{[}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{评分人数}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{好评数}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{]}\PY{o}{.}\PY{n}{boxplot}\PY{p}{(}\PY{n}{whis}\PY{o}{=}\PY{l+m+mi}{3}\PY{p}{,}\PY{n}{return\PYZus{}type}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{dict}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{n}{ax}\PY{o}{=}\PY{n}{axes}\PY{p}{[}\PY{n}{i}\PY{p}{,}\PY{n}{j}\PY{p}{]}\PY{p}{)}
+                  \PY{n}{start}\PY{o}{+}\PY{o}{=}\PY{l+m+mi}{1}
+          
+          \PY{c+c1}{\PYZsh{}查看异常值}
+          
+          \PY{k}{def} \PY{n+nf}{f3}\PY{p}{(}\PY{n}{df}\PY{p}{,}\PY{n}{col}\PY{p}{)}\PY{p}{:}
+              \PY{n}{q1}\PY{o}{=}\PY{n}{df}\PY{p}{[}\PY{n}{col}\PY{p}{]}\PY{o}{.}\PY{n}{quantile}\PY{p}{(}\PY{n}{q}\PY{o}{=}\PY{l+m+mf}{0.25}\PY{p}{)}
+              \PY{n}{q3}\PY{o}{=}\PY{n}{df}\PY{p}{[}\PY{n}{col}\PY{p}{]}\PY{o}{.}\PY{n}{quantile}\PY{p}{(}\PY{n}{q}\PY{o}{=}\PY{l+m+mf}{0.75}\PY{p}{)}
+              \PY{n}{IQR}\PY{o}{=}\PY{n}{q3}\PY{o}{\PYZhy{}}\PY{n}{q1}
+              \PY{n}{tmax}\PY{o}{=}\PY{n}{q3}\PY{o}{+}\PY{l+m+mi}{3}\PY{o}{*}\PY{n}{IQR}
+              \PY{n}{tmin}\PY{o}{=}\PY{n}{q1}\PY{o}{\PYZhy{}}\PY{l+m+mi}{3}\PY{o}{*}\PY{n}{IQR}
+              \PY{k}{return} \PY{p}{(}\PY{n}{tmin}\PY{p}{,}\PY{n}{tmax}\PY{p}{)}
+          
+          \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{2001}\PY{p}{,}\PY{l+m+mi}{2017}\PY{p}{)}\PY{p}{:}
+              \PY{n}{df\PYZus{}data}\PY{o}{=}\PY{n}{merge\PYZus{}dat}\PY{p}{[}\PY{n}{merge\PYZus{}dat}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{上映年份}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{==}\PY{n}{i}\PY{p}{]}
+              \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+si}{\PYZob{}\PYZcb{}}\PY{l+s+s2}{年共有}\PY{l+s+si}{\PYZob{}\PYZcb{}}\PY{l+s+s2}{条数据}\PY{l+s+s2}{\PYZdq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n}{i}\PY{p}{,}\PY{n+nb}{len}\PY{p}{(}\PY{n}{df\PYZus{}data}\PY{p}{)}\PY{p}{)}\PY{p}{)}
+              \PY{n}{theta}\PY{o}{=}\PY{n}{f3}\PY{p}{(}\PY{n}{df\PYZus{}data}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{评分人数}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}
+              \PY{n+nb}{print}\PY{p}{(}\PY{n}{df\PYZus{}data}\PY{p}{[}\PY{n}{df\PYZus{}data}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{评分人数}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{\PYZgt{}}\PY{n}{theta}\PY{p}{]}\PY{p}{)}
+              
+              
+          \PY{c+c1}{\PYZsh{} threhold=f3(merge\PYZus{}dat[merge\PYZus{}dat[\PYZsq{}上映年份\PYZsq{}]==2016],\PYZsq{}评分人数\PYZsq{})}
+          \PY{c+c1}{\PYZsh{} merge\PYZus{}dat.loc[merge\PYZus{}dat[\PYZsq{}上映年份\PYZsq{}]==2016,\PYZsq{}评分人数\PYZsq{}]\PYZgt{}threhold[1]}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+       数据获取日期   演员  视频ID                                        详细链接  \textbackslash{}
+0  2016年5月24日  NaN   100  http://www.iqiyi.com/dianshiju/douyu2.html   
+1  2016年5月24日  NaN  1037   http://www.iqiyi.com/dianshiju/jhuxd.html   
+2  2016年5月24日  NaN  1573  http://www.iqiyi.com/dianshiju/fmxqj2.html   
+3  2016年5月24日  NaN  1739    http://www.iqiyi.com/dianshiju/qtjm.html   
+4  2016年5月24日  NaN  1756   http://www.iqiyi.com/dianshiju/18jbj.html   
+
+               剧名   状态                     类型 来源平台     整理后剧名 更新时间    {\ldots}     \textbackslash{}
+0     斗鱼Ⅱ(1-20)全集  已完结  粤语电视剧/偶像剧/言情剧/超清1080P  爱奇艺       斗鱼2  NaN    {\ldots}      
+1    江湖兄弟(1-32)全集  已完结  粤语电视剧/悬疑剧/年代剧/超清1080P  爱奇艺    江湖兄弟全集  NaN    {\ldots}      
+2  肥猫寻亲记2(1-30)全集  已完结           粤语电视剧/家庭剧/喜剧  爱奇艺  肥猫寻亲记2全集  NaN    {\ldots}      
+3    舞台姐妹(1-34)全集  已完结          粤语电视剧/年代剧/家庭剧  爱奇艺    舞台姐妹全集  NaN    {\ldots}      
+4   18禁不禁(1-30)全集  已完结   粤语电视剧/偶像剧/超清1080P/喜剧  爱奇艺   18禁不禁全集  NaN    {\ldots}      
+
+     上映年份                                                 简介   导演      差评数  \textbackslash{}
+0  2004.0  在单子杀了阿豹派去强暴语燕的手下而入狱后，众人的生活都有了改变。语燕为了让自己不再是于皓的包{\ldots}  NaN   2034.0   
+1  2008.0  1930年代，海龙城首富唐英明用五斗上等珍珠，击败列国商业对手，买得与铁达尼齐名之奥丽号邮轮{\ldots}  NaN   7291.0   
+2  2005.0  肥猫经历了几番风雨，终于寻回了他的亲生弟妹们：年轻有为的医生二弟华世杰、大律师三妹婉容、美丽{\ldots}  NaN   1183.0   
+3  2006.0  一对原本乡下“阳春舞台班“苦命姐妹春花和月红，在戏霸唐经理的阴谋算计下来到大上海的灯红酒绿下{\ldots}  NaN    451.0   
+4  2007.0  一部台湾偶像剧，由三个偶像团体（模范棒棒堂Choc7、黑Girl、翼势力）的成员和多位新进演{\ldots}  NaN  63551.0   
+
+       评分人数         播放量 更新至   总集数  第几季       好评数  
+0   32722.0   8069526.0 NaN  20.0    2   30688.0  
+1   39492.0  70213917.0 NaN  32.0    1   32201.0  
+2   10105.0   3310768.0 NaN  30.0    1    8922.0  
+3    2639.0   2088958.0 NaN  34.0    1    2188.0  
+4  748338.0  41287893.0 NaN  30.0    1  684787.0  
+
+[5 rows x 24 columns]
+<class 'pandas.core.frame.DataFrame'>
+RangeIndex: 100000 entries, 0 to 99999
+Data columns (total 24 columns):
+数据获取日期    100000 non-null object
+演员        97981 non-null object
+视频ID      100000 non-null object
+详细链接      99999 non-null object
+剧名        100000 non-null object
+状态        99158 non-null object
+类型        100000 non-null object
+来源平台      100000 non-null object
+整理后剧名     100000 non-null object
+更新时间      644 non-null object
+上映时间      78755 non-null float64
+语言        85926 non-null object
+评分        99971 non-null float64
+地区        98728 non-null object
+上映年份      78755 non-null float64
+简介        99971 non-null object
+导演        97614 non-null object
+差评数       99971 non-null float64
+评分人数      99971 non-null float64
+播放量       99453 non-null float64
+更新至       1272 non-null float64
+总集数       98871 non-null float64
+第几季       100000 non-null int64
+好评数       99971 non-null float64
+dtypes: float64(9), int64(1), object(14)
+memory usage: 18.3+ MB
+           数据获取日期                                                 演员  \textbackslash{}
+0      2016年5月24日                                               缺失数据   
+1      2016年5月24日                                               缺失数据   
+2      2016年5月24日                                               缺失数据   
+3      2016年5月24日                                               缺失数据   
+4      2016年5月24日                                               缺失数据   
+5      2016年5月24日                                               缺失数据   
+6      2016年5月24日                                               缺失数据   
+7      2016年5月24日                                               缺失数据   
+8      2016年5月24日                                               缺失数据   
+9      2016年5月24日                                               缺失数据   
+10     2016年5月24日                                               缺失数据   
+11     2016年5月24日                                               缺失数据   
+12     2016年5月24日                                               缺失数据   
+13     2016年5月24日          Angelababy/杜淳/陆毅/陈晓/杨蓉/苏青/毛晓彤/包贝尔/寇振海/刘冠翔   
+14     2016年5月24日  Angelababy/杜淳/陆毅/陈晓/杨蓉/苏青/毛晓彤/包贝尔/寇振海/刘冠翔/阚清子/张雅萌   
+15     2016年5月24日  Dean Winters/Josh Duhamel/Kal Penn/Aubrey Doll{\ldots}   
+16     2016年5月24日                ELLA/吴尊/汪东城/唐禹哲/唐治平/阮经天/张皓明/龚继安/郭静纯   
+17     2016年5月24日                     Nichkhun/徐璐/蒋劲夫/魏大勋/朱丹/周晓鸥/于文文   
+18     2016年5月24日           Nichkhun/徐璐/蒋劲夫/魏大勋/朱丹/周晓鸥/于文文/高珑珂/孟佳/李昶   
+19     2016年5月24日                                        UEE/崔宇植/任瑟雍   
+20     2016年5月24日        Weir Sukollwat/Usamanee Vaithayanon/查亚鹏·普帕特   
+21     2016年5月24日                                                丁勇岱   
+22     2016年5月24日                                     丁勇岱/刘威葳/郭涛/周晓鸥   
+23     2016年5月24日                                             丁勇岱/刘欣   
+24     2016年5月24日                                     丁勇岱/梁静/刘金山/海一天   
+25     2016年5月24日                                             丁勇岱/谢兰   
+26     2016年5月24日                             丁勇岱/陈瑾/曹克难/石维坚/王诗槐/宋春丽   
+27     2016年5月24日                              丁志成/张彤/王海地/沈丹萍/赵曦/尹国华   
+28     2016年5月24日                                             丁志诚/刘斌   
+29     2016年5月24日                          丁志诚/郝蕾/傅 彪/鲍国安/徐 峥/崔 波/何琳   
+{\ldots}           {\ldots}                                                {\ldots}   
+99970   2016年4月9日                                  陈建斌/高明/苏可/伊春德/潘晓莉   
+99971   2016年4月9日              陈思诚/王丽坤/于荣光/阚清子/矢野浩二/张鹰/杜淳/李光洁/严屹宽/于震   
+99972   2016年4月9日                        陈意涵/千正明/王钧赫/汤镇宗/牟星/马睿/博弘/沈航   
+99973   2016年4月9日                                    陈意涵/崔始源/李东海/白歆惠   
+99974   2016年4月9日                       陈意涵/薛仕凌/鲁诺/耿明吉/董路/杨子仪/金雨淳/赵雷   
+99975   2016年4月9日                       陈意涵/薛仕凌/鲁诺/耿明吉/董路/杨子仪/金雨淳/赵雷   
+99976   2016年4月9日          陈数/孙淳/翟天临/种丹妮/鲍大志/梁丽/师春玲/张宁益/孙浩浩/李涓/赵骏/刑城   
+99977   2016年4月9日                        陈数/王雷/张丹妮/张鲁一/韩青/谢园/马澜菲/张小磊   
+99978   2016年4月9日                   陈昭荣/陈德容/斓曦/罗琪琪/李雨泽/吴雨桐/董可飞/郭军/田丽   
+99979   2016年4月9日                                                 陈晓   
+99980   2016年4月9日                   陈晓/郑爽/严屹宽/刘德凯/梁冠华/谢宁/马书良/张芷溪/饶晓志   
+99981   2016年4月9日                   陈晓/郑爽/严屹宽/张芷溪/刘德凯/梁冠华/谢宁/马书良/饶晓志   
+99982   2016年4月9日  陈晓/陈妍希/张馨予/吴磊/杨明娜/郑国霖/毛晓彤/赵韩樱子/孙耀琦/邬靖靖/宋洋/张雪迎/{\ldots}   
+99983   2016年4月9日            陈晓东/唐艺昕/徐正曦/毛林林/孙骁骁/金泽灏/胡彩虹/张籽沐/杨志雯/张逸杰   
+99984   2016年4月9日         陈晓东/唐艺昕/徐正曦/毛林林/孙骁骁/金泽灏/胡彩虹/杨志雯/张逸杰/张籽沐/张岩   
+99985   2016年4月9日         陈晓东/唐艺昕/徐正曦/毛林林/孙骁骁/金泽灏/胡彩虹/杨志雯/张逸杰/张籽沐/张岩   
+99986   2016年4月9日         陈晓东/唐艺昕/徐正曦/毛林林/孙骁骁/金泽灏/胡彩虹/杨志雯/张逸杰/张籽沐/张岩   
+99987   2016年4月9日                                        陈晓东/李冰冰/高圆圆   
+99988   2016年4月9日                                    陈柏霖/吴慷仁/陈庭妮/柯震东   
+99989   2016年4月9日                                         陈法蓉/谢园/苗乙乙   
+99990   2016年4月9日                               陈洁/孙玮/申军谊/高一玮/吴晓东/胡桑   
+99991   2016年4月9日                   陈浩民/宣萱/馨子/李进荣/张亮/郑鹏飞/涂黎曼/张咏棋/陈怡真   
+99992   2016年4月9日                   陈浩民/宣萱/馨子/李进荣/张亮/郑鹏飞/涂黎曼/张咏棋/陈怡真   
+99993   2016年4月9日                             陈浩民/杜雨露/张晨光/归亚蕾/高圆圆/郝蕾   
+99994   2016年4月9日                                  陈浩民/杨若兮/王斑/张蓓蓓/巍子   
+99995   2016年4月9日                               陈浩民/林子聪/叶祖新/周觅/馨子/张亮   
+99996   2016年4月9日                         陈浩民/林子聪/陈威翰/唐熙/陈紫函/穆婷婷/关智斌   
+99997   2016年4月9日                         陈浩民/林子聪/陈威翰/唐熙/陈紫函/穆婷婷/关智斌   
+99998   2016年4月9日                         陈浩民/林子聪/陈威翰/唐熙/陈紫函/穆婷婷/关智斌   
+99999   2016年4月9日                         陈浩民/林子聪/陈威翰/唐熙/陈紫函/穆婷婷/关智斌   
+
+            视频ID                                        详细链接              剧名  \textbackslash{}
+0            100  http://www.iqiyi.com/dianshiju/douyu2.html     斗鱼Ⅱ(1-20)全集   
+1           1037   http://www.iqiyi.com/dianshiju/jhuxd.html    江湖兄弟(1-32)全集   
+2           1573  http://www.iqiyi.com/dianshiju/fmxqj2.html  肥猫寻亲记2(1-30)全集   
+3           1739    http://www.iqiyi.com/dianshiju/qtjm.html    舞台姐妹(1-34)全集   
+4           1756   http://www.iqiyi.com/dianshiju/18jbj.html   18禁不禁(1-30)全集   
+5           1757  http://www.iqiyi.com/dianshiju/18sdtk.html  18岁的约定(1-21)全集   
+6           1837      http://www.iqiyi.com/dianshiju/dy.html      斗鱼(1-20)全集   
+7      200175401      http://www.iqiyi.com/a\_19rrgjd745.html          人生需要揭穿   
+8      202938201      http://www.iqiyi.com/a\_19rrhb9eet.html           太阳的后裔   
+9           2212   http://www.iqiyi.com/dianshiju/yjjhx.html   又见橘花香(1-20)全集   
+10        231776      http://www.iqiyi.com/a\_19rrk743u5.html           穿帮集中营   
+11          2415    http://www.iqiyi.com/dianshiju/lhgs.html    离婚官司(1-20)全集   
+12          2724    http://www.iqiyi.com/dianshiju/ssdl.html    生死谍恋(1-34)全集   
+13     202981401      http://www.iqiyi.com/a\_19rrhb6w6t.html    大汉情缘之云中歌未删减版   
+14     201098501      http://www.iqiyi.com/a\_19rrgip3zd.html        大汉情缘之云中歌   
+15     202536601      http://www.iqiyi.com/a\_19rrhazr3p.html         错配搭档第1季   
+16     202249701      http://www.iqiyi.com/a\_19rrhc3m2x.html          花样少年少女   
+17     201180401      http://www.iqiyi.com/a\_19rrgind0d.html   一又二分之一的夏天未删减版   
+18     200745001      http://www.iqiyi.com/a\_19rrgiefd1.html       一又二分之一的夏天   
+19     203338201      http://www.iqiyi.com/a\_19rrhbhos5.html           浩九的爱情   
+20     202170101      http://www.iqiyi.com/a\_19rrhc16zd.html          命定之爱国语   
+21     203259601      http://www.iqiyi.com/a\_19rrhbcfr1.html          末路1997   
+22     202275801      http://www.iqiyi.com/a\_19rrhc354l.html              暗伤   
+23     203103101      http://www.iqiyi.com/a\_19rrhba61d.html              威胁   
+24     202276001      http://www.iqiyi.com/a\_19rrhc34y5.html             水晶眼   
+25     202992201      http://www.iqiyi.com/a\_19rrhb6qzp.html              驼道   
+26     202997401      http://www.iqiyi.com/a\_19rrhb6tit.html            不堪回首   
+27        159347      http://www.iqiyi.com/a\_19rrifkjz3.html            凝视黑夜   
+28     202808701      http://www.iqiyi.com/a\_19rrhb6n81.html            永不言败   
+29     200800301      http://www.iqiyi.com/a\_19rrgiewqp.html            新铡美案   
+{\ldots}          {\ldots}                                         {\ldots}             {\ldots}   
+99970  203258401      http://www.iqiyi.com/a\_19rrhbcggd.html            最后诊断   
+99971  202122901      http://www.iqiyi.com/a\_19rrhc0jcp.html              战神   
+99972  200431101      http://www.iqiyi.com/a\_19rrgia3kh.html           亲情保卫战   
+99973     145230      http://www.iqiyi.com/a\_19rrk1ylqt.html           华丽的挑战   
+99974     115684      http://www.iqiyi.com/a\_19rrk3vmyl.html        恋爱SOS第一季   
+99975     117070      http://www.iqiyi.com/a\_19rrk3yaad.html        恋爱SOS第二季   
+99976  202720501      http://www.iqiyi.com/a\_19rrhb195l.html              剧场   
+99977  202171401      http://www.iqiyi.com/a\_19rrhc0w9x.html            谈判冤家   
+99978     365163      http://www.iqiyi.com/a\_19rrjytnoh.html         下辈子还嫁给你   
+99979  202318101      http://www.iqiyi.com/a\_19rrhc1yt5.html     神雕侠侣陈晓版杨过特辑   
+99980  203404701      http://www.iqiyi.com/a\_19rrhbg9gx.html           五鼠闹东京   
+99981  203622401      http://www.iqiyi.com/a\_19rrhacdwt.html       五鼠闹东京未删减版   
+99982  202260501      http://www.iqiyi.com/a\_19rrhc3795.html            神雕侠侣   
+99983  200604901      http://www.iqiyi.com/a\_19rrgidhft.html        加油爱人未删减版   
+99984  200604501      http://www.iqiyi.com/a\_19rrgidhkp.html            加油爱人   
+99985  200686101      http://www.iqiyi.com/a\_19rrgifybd.html            幸福爱人   
+99986  200686201      http://www.iqiyi.com/a\_19rrgify8l.html        幸福爱人未删减版   
+99987  203262201      http://www.iqiyi.com/a\_19rrhbdlzp.html            海的誓言   
+99988     419941      http://www.iqiyi.com/a\_19rrjvvel5.html           这一刻爱吧   
+99989  202264001      http://www.iqiyi.com/a\_19rrhc37vx.html            富贵临门   
+99990  202989901      http://www.iqiyi.com/a\_19rrhb6plt.html            铁血雄心   
+99991     171735      http://www.iqiyi.com/a\_19rrjzq32p.html         薛平贵与王宝钏   
+99992  203793301      http://www.iqiyi.com/a\_19rrhafny1.html      薛平贵与王宝钏央视版   
+99993  203790601      http://www.iqiyi.com/a\_19rrhafzad.html            烟花三月   
+99994  203257801      http://www.iqiyi.com/a\_19rrhbcdyd.html            剑出江南   
+99995     123614      http://www.iqiyi.com/a\_19rrk33ec5.html           活佛济公2   
+99996  202112301      http://www.iqiyi.com/a\_19rrhbwt35.html           新济公活佛   
+99997  202112401      http://www.iqiyi.com/a\_19rrhbwt8d.html       新济公活佛未删减版   
+99998  203114101      http://www.iqiyi.com/a\_19rrhb9o2h.html         新济公活佛下部   
+99999  203114801      http://www.iqiyi.com/a\_19rrhb9qot.html     新济公活佛下部未删减版   
+
+         状态                                 类型 来源平台      整理后剧名  \textbackslash{}
+0       已完结              粤语电视剧/偶像剧/言情剧/超清1080P  爱奇艺        斗鱼2   
+1       已完结              粤语电视剧/悬疑剧/年代剧/超清1080P  爱奇艺     江湖兄弟全集   
+2       已完结                       粤语电视剧/家庭剧/喜剧  爱奇艺   肥猫寻亲记2全集   
+3       已完结                      粤语电视剧/年代剧/家庭剧  爱奇艺     舞台姐妹全集   
+4       已完结               粤语电视剧/偶像剧/超清1080P/喜剧  爱奇艺    18禁不禁全集   
+5       已完结              粤语电视剧/偶像剧/言情剧/超清1080P  爱奇艺   18岁的约定全集   
+6       已完结              粤语电视剧/偶像剧/言情剧/超清1080P  爱奇艺       斗鱼全集   
+7      缺失数据   粤语电视剧/超清1080P/偶像剧/家庭剧/青春剧/网络剧/喜剧  爱奇艺     人生需要揭穿   
+8      缺失数据           粤语电视剧/偶像剧/剧情/言情剧/超清1080P  爱奇艺      太阳的后裔   
+9       已完结      粤语电视剧/偶像剧/言情剧/超清1080P/青春剧/家庭剧  爱奇艺    又见橘花香全集   
+10      更新中               喜剧/穿越剧/粤语电视剧/超清1080P  爱奇艺      穿帮集中营   
+11      已完结                   粤语电视剧/剧情/家庭剧/青春剧  爱奇艺     离婚官司全集   
+12      已完结          粤语电视剧/谍战剧/超清1080P/言情剧/军旅剧  爱奇艺     生死谍恋全集   
+13      已完结      宫廷剧/古装剧/偶像剧/言情剧/粤语电视剧/超清1080P  爱奇艺   大汉情缘之云中歌   
+14      已完结  言情剧/古装剧/偶像剧/宫廷剧/青春剧/粤语电视剧/超清1080P  爱奇艺   大汉情缘之云中歌   
+15      已完结            喜剧/罪案剧/剧情/粤语电视剧/超清1080P  爱奇艺       错配搭档   
+16      已完结          言情剧/偶像剧/青春剧/粤语电视剧/超清1080P  爱奇艺     花样少年少女   
+17      已完结          青春剧/言情剧/偶像剧/粤语电视剧/超清1080P  爱奇艺  1又2分之1的夏天   
+18      已完结          青春剧/言情剧/偶像剧/粤语电视剧/超清1080P  爱奇艺  1又2分之1的夏天   
+19      已完结            言情剧/剧情/都市/粤语电视剧/超清1080P  爱奇艺      浩9的爱情   
+20      已完结       偶像剧/言情剧/剧情/年代剧/粤语电视剧/超清1080P  爱奇艺     命定之爱国语   
+21      已完结               罪案剧/剧情/粤语电视剧/超清1080P  爱奇艺     末路1997   
+22      已完结                        剧情/都市/粤语电视剧  爱奇艺         暗伤   
+23      已完结                    剧情/都市/悬疑剧/粤语电视剧  爱奇艺         威胁   
+24      已完结                    罪案剧/剧情/都市/粤语电视剧  爱奇艺        水晶眼   
+25      已完结           言情剧/剧情/年代剧/粤语电视剧/超清1080P  爱奇艺         驼道   
+26      已完结                    罪案剧/剧情/都市/粤语电视剧  爱奇艺       不堪回首   
+27      已完结                       罪案剧/剧情/粤语电视剧  爱奇艺       凝视黑夜   
+28      已完结                       剧情/悬疑剧/粤语电视剧  爱奇艺       永不言败   
+29      已完结                   宫廷剧/古装剧/剧情/粤语电视剧  爱奇艺       新铡美案   
+{\ldots}     {\ldots}                                {\ldots}  {\ldots}        {\ldots}   
+99970   已完结                 言情剧/剧情/悬疑剧/超清1080P  爱奇艺       最后诊断   
+99971   已完结                         军旅剧/历史剧/剧情  爱奇艺         战神   
+99972  缺失数据                        家庭剧/言情剧/偶像剧  爱奇艺      亲情保卫战   
+99973   更新中                        青春剧/言情剧/偶像剧  爱奇艺      华丽的挑战   
+99974   已完结                        青春剧/言情剧/偶像剧  爱奇艺      恋爱sos   
+99975   已完结                        青春剧/言情剧/偶像剧  爱奇艺     恋爱sos2   
+99976   已完结                      言情剧/年代剧/剧情/都市  爱奇艺         剧场   
+99977   已完结                         都市/言情剧/偶像剧  爱奇艺       谈判冤家   
+99978  缺失数据                        家庭剧/言情剧/年代剧  爱奇艺    下辈子还嫁给你   
+99979   已完结                 剧情/言情剧/武侠剧/古装剧/偶像剧  爱奇艺   神雕侠侣杨过特辑   
+99980   已完结                            武侠剧/古装剧  爱奇艺      5鼠闹东京   
+99981   已完结                    言情剧/武侠剧/古装剧/偶像剧  爱奇艺      5鼠闹东京   
+99982   已完结                    言情剧/武侠剧/古装剧/偶像剧  爱奇艺       神雕侠侣   
+99983   已完结                     青春剧/言情剧/都市/偶像剧  爱奇艺       加油爱人   
+99984   已完结                     青春剧/言情剧/都市/偶像剧  爱奇艺       加油爱人   
+99985   已完结                     青春剧/言情剧/都市/偶像剧  爱奇艺       幸福爱人   
+99986   已完结                     青春剧/言情剧/都市/偶像剧  爱奇艺       幸福爱人   
+99987   已完结                  言情剧/剧情/都市/超清1080P  爱奇艺       海的誓言   
+99988   已完结                    青春剧/言情剧/网络剧/偶像剧  爱奇艺      这1刻爱吧   
+99989   已完结                          喜剧/家庭剧/都市  爱奇艺       富贵临门   
+99990   已完结                             罪案剧/剧情  爱奇艺       铁血雄心   
+99991   已完结                            言情剧/古装剧  爱奇艺    薛平贵与王宝钏   
+99992   已完结                        宫廷剧/言情剧/古装剧  爱奇艺    薛平贵与王宝钏   
+99993   已完结                    宫廷剧/古装剧/超清1080P  爱奇艺       烟花3月   
+99994   已完结                 武侠剧/古装剧/剧情/超清1080P  爱奇艺       剑出江南   
+99995   已完结                         喜剧/神话剧/古装剧  爱奇艺      活佛济公2   
+99996   已完结                     神话剧/武侠剧/古装剧/剧情  爱奇艺      新济公活佛   
+99997   已完结                     神话剧/武侠剧/古装剧/剧情  爱奇艺      新济公活佛   
+99998   已完结                            神话剧/古装剧  爱奇艺    新济公活佛下部   
+99999   已完结                            神话剧/古装剧  爱奇艺    新济公活佛下部   
+
+                   更新时间    {\ldots}        上映年份  \textbackslash{}
+0                  缺失数据    {\ldots}      2004.0   
+1                  缺失数据    {\ldots}      2008.0   
+2                  缺失数据    {\ldots}      2005.0   
+3                  缺失数据    {\ldots}      2006.0   
+4                  缺失数据    {\ldots}      2007.0   
+5                  缺失数据    {\ldots}      2002.0   
+6                  缺失数据    {\ldots}      2004.0   
+7                  缺失数据    {\ldots}         0.0   
+8                  缺失数据    {\ldots}         0.0   
+9                  缺失数据    {\ldots}      2003.0   
+10                 缺失数据    {\ldots}      2012.0   
+11                 缺失数据    {\ldots}      2007.0   
+12                 缺失数据    {\ldots}      2008.0   
+13                 缺失数据    {\ldots}         0.0   
+14                 缺失数据    {\ldots}         0.0   
+15                 缺失数据    {\ldots}         0.0   
+16                 缺失数据    {\ldots}      2006.0   
+17                 缺失数据    {\ldots}         0.0   
+18                 缺失数据    {\ldots}         0.0   
+19                 缺失数据    {\ldots}      2015.0   
+20                 缺失数据    {\ldots}      2007.0   
+21                 缺失数据    {\ldots}      2000.0   
+22                 缺失数据    {\ldots}      2006.0   
+23                 缺失数据    {\ldots}      2003.0   
+24                 缺失数据    {\ldots}      2006.0   
+25                 缺失数据    {\ldots}      1995.0   
+26                 缺失数据    {\ldots}      2005.0   
+27                 缺失数据    {\ldots}      2001.0   
+28                 缺失数据    {\ldots}      2005.0   
+29                 缺失数据    {\ldots}      2005.0   
+{\ldots}                 {\ldots}    {\ldots}         {\ldots}   
+99970              缺失数据    {\ldots}      2004.0   
+99971              缺失数据    {\ldots}         0.0   
+99972              缺失数据    {\ldots}         0.0   
+99973  每周一下午14:00跟播1集 分    {\ldots}         0.0   
+99974              缺失数据    {\ldots}      2011.0   
+99975              缺失数据    {\ldots}      2011.0   
+99976              缺失数据    {\ldots}      2015.0   
+99977              缺失数据    {\ldots}      2014.0   
+99978              缺失数据    {\ldots}      2013.0   
+99979              缺失数据    {\ldots}         0.0   
+99980              缺失数据    {\ldots}         0.0   
+99981              缺失数据    {\ldots}      2016.0   
+99982              缺失数据    {\ldots}         0.0   
+99983              缺失数据    {\ldots}         0.0   
+99984              缺失数据    {\ldots}         0.0   
+99985              缺失数据    {\ldots}      2014.0   
+99986              缺失数据    {\ldots}      2014.0   
+99987              缺失数据    {\ldots}      2004.0   
+99988              缺失数据    {\ldots}         0.0   
+99989              缺失数据    {\ldots}      2002.0   
+99990              缺失数据    {\ldots}      2012.0   
+99991              缺失数据    {\ldots}         0.0   
+99992              缺失数据    {\ldots}      2012.0   
+99993              缺失数据    {\ldots}      2005.0   
+99994              缺失数据    {\ldots}      2005.0   
+99995              缺失数据    {\ldots}      2011.0   
+99996              缺失数据    {\ldots}         0.0   
+99997              缺失数据    {\ldots}         0.0   
+99998              缺失数据    {\ldots}         0.0   
+99999              缺失数据    {\ldots}         0.0   
+
+                                                      简介           导演  \textbackslash{}
+0      在单子杀了阿豹派去强暴语燕的手下而入狱后，众人的生活都有了改变。语燕为了让自己不再是于皓的包{\ldots}         缺失数据   
+1      1930年代，海龙城首富唐英明用五斗上等珍珠，击败列国商业对手，买得与铁达尼齐名之奥丽号邮轮{\ldots}         缺失数据   
+2      肥猫经历了几番风雨，终于寻回了他的亲生弟妹们：年轻有为的医生二弟华世杰、大律师三妹婉容、美丽{\ldots}         缺失数据   
+3      一对原本乡下“阳春舞台班“苦命姐妹春花和月红，在戏霸唐经理的阴谋算计下来到大上海的灯红酒绿下{\ldots}         缺失数据   
+4      一部台湾偶像剧，由三个偶像团体（模范棒棒堂Choc7、黑Girl、翼势力）的成员和多位新进演{\ldots}         缺失数据   
+5      何帆，是一个天才型调酒师，也是各高校极欲网罗的名师对象。晓彤，班上的一名女学生。在日积月累之{\ldots}         缺失数据   
+6      两个世界的人，可以是朋友、可以是仇人、可以错身而过，但是如果他们相爱了，结局只有走上灭绝的命{\ldots}         缺失数据   
+7                               人生需要揭穿-统帅电器-高清视频在线观看-爱奇艺         缺失数据   
+8      《太阳的后裔》是由李应福导演，由宋仲基、宋慧乔等主演的电视剧，共16集，爱奇艺为你提供太阳的{\ldots}         缺失数据   
+9      每一次恋爱，有多少回忆停驻在你的脑海里？初恋的滋味，总是带点甜蜜，带点苦涩。杜凯翔接到小学同{\ldots}         缺失数据   
+10     《穿帮集中营》是互联网首档专门揭示点评热门电视剧穿帮镜头的点评类节目，由中国第一高清影视门户{\ldots}          剧视电   
+11     本剧以一位民事法庭人民法官的主观视角，讲述了十个看似平淡，却意蕴悠长的离婚案件，揭示了中国当{\ldots}         缺失数据   
+12     反击日寇的谍报战场上，共产党员夏潇雪与国民党员唐问生不期而遇，他们相互爱恋，却又相互刺探防备{\ldots}         缺失数据   
+13     西汉时期(公元80年)，年少的汉昭帝刘弗陵在荒漠迷途，得女孩云歌带其走出荒漠，刘弗陵最终被精{\ldots}  胡意涓/胡明凯/蔡晶盛   
+14     西汉时期(公元80年)，年少的汉昭帝刘弗陵在荒漠迷途，得女孩云歌带其走出荒漠，刘弗陵最终被精{\ldots}  胡意涓/胡明凯/蔡晶盛   
+15     《绝命毒师》创作人Vince Gilligan和《豪斯医生》创作人David Shore将强{\ldots}       布莱恩·辛格   
+16     瑞莃因为崇拜跳高选手左以泉，所以千里迢迢回国女扮男装进入与泉同一所男校念书，而且幸运的和泉同{\ldots}      林清芳/王明台   
+17     《一又二分之一的夏天》是由中韩合作的校园浪漫清甜派偶像剧，分别于厦门，北京和希腊取景拍摄。本{\ldots}          张林子   
+18     《一又二分之一的夏天》是由中韩合作的校园浪漫清甜派偶像剧，分别于厦门，北京和希腊取景拍摄。本{\ldots}          张林子   
+19     该剧翻拍自韩国同名网络漫画，讲述了从未谈过恋爱的母胎单身男姜浩九（崔宇植饰）、游泳女神都桃姬{\ldots}          表民洙   
+20     该剧讲述的是虚构的三个国家Tanta、Panturath、Kasik，Tanta的国王、公主{\ldots}           未知   
+21     白宝山原本拥有一个正常的家庭，却因为一念之差堕入了罪恶的深渊。20世纪80年代，他被收监，在{\ldots}          陈国军   
+22     民三年来，龙在天——这个游走在法律边缘的神秘客，已经成为石坊市的传奇人物。如今，通过叶蓓主持{\ldots}          高群书   
+23     深夜，大火，奔涌肆虐的地下之火，无情地吞噬着井下的矿工。救护车警笛声声，溪平不眠，溪平煤矿发{\ldots}          陈国军   
+24     雷鸣、麦欧在侦破的过程也同样经受着种种考验，其间既有个人感情与国家利益的冲突、也有引导罪犯走{\ldots}           常猛   
+25     驼道，以著名商号“大盛魁”的兴衰为背景，以主人公古海的命运为主线，生动地描绘了一代晋商不屈不{\ldots}          史晨风   
+26     30 万元是一条无形的锁链，将出身贫寒、正直清廉的戚新军死死套牢。随着澳华工贸集团靠侵吞国有{\ldots}          唐敬睿   
+27     白浪滩大型开发项目即将全面展开，这时，白浪村村委会主任巫林伟却突然。天北集团副总经理古良得知{\ldots}          陈胜利   
+28     本剧通过刑警、法医运用刑事侦查技术手段侦破贩毒凶杀案的特殊案例，表现和歌颂了我国公安干警和刑{\ldots}          张来京   
+29     抛妻弃子,攀龙附凤,谁解个中由?亦正亦邪,扶摇直上,只为洗心仇! 一场深宫血雨腥风,一段悲情{\ldots}          陈晓雷   
+{\ldots}                                                  {\ldots}          {\ldots}   
+99970  海归派神经外科医学博士沈知鱼来到地方某大医院工作。初一到岗，便完成数例高难度神外手术，因此受{\ldots}           王瑞   
+99971  太行山一带，八路军游击队司令龙大谷骁勇善战，机智过人，15岁就参加了红军，身经百战，被军中将{\ldots}          国建勇   
+99972  人的一生存在着无数选择，唯有一样全凭上天决定，那就是血缘亲情。随着时代的发展，人们之间的情感{\ldots}          蒋凯宸   
+99973  根据日本超人气漫画改编，崔始源，李东海争相卖萌，宠翻小天后陈意涵。女主角宫囍是个不打扮，每天{\ldots}          冯家瑞   
+99974  本剧讲述了一个颇具戏剧性的故事，四个要债人因为同时追缴欠款凑到一起，他们想尽办法终于成功地将{\ldots}          宋坤儒   
+99975  《恋爱SOS》第一季讲述了一个颇具戏剧性的故事，四个要债人因为同时追缴欠款凑到一起，他们想尽{\ldots}          宋坤儒   
+99976  本剧讲述上世纪80年代一个小城话剧团的悲欢离合。年过四十的女演员郁珠在当地家喻户晓，演技精湛{\ldots}          杨文军   
+99977  乔楚是家地产公司的公关经理，事业成功生活幸福。在十周年结婚纪念日当天，丈夫方杰突然失踪，留给{\ldots}           杨磊   
+99978  美丽聪慧的沈云娘邂逅男子傅文旭，两人相爱，云娘自小受到同父异母的哥哥沈万生的欺凌，虽天生命苦{\ldots}           罗福   
+99979  《神雕侠侣陈晓版杨过特辑》是由李慧珠导演， 由陈晓等主演的内地电视剧，共44集，爱奇艺为你提{\ldots}          李慧珠   
+99980  北宋年间陷空岛住着五个结拜兄弟绰号“五鼠”，江湖南侠展昭因佑护包公有功被宋仁宗赐 “御猫”封{\ldots}          吴家骀   
+99981  北宋年间陷空岛住着五个结拜兄弟绰号“五鼠”，江湖南侠展昭因佑护包公有功被宋仁宗赐 “御猫”封{\ldots}          吴家骀   
+99982  2014年内地版《神雕侠侣》主要讲述了南宋末年，杨过和小龙女经历了一番凄美爱情与江湖恩怨的故{\ldots}          李慧珠   
+99983  童年时的一场见义勇为，让小瀚宇与小慕妍成为彼此生命中最重要的朋友，然而命运戏弄，两人天各一方{\ldots}          张博昱   
+99984  童年时的一场见义勇为，让小瀚宇与小慕妍成为彼此生命中最重要的朋友，然而命运戏弄，两人天各一方{\ldots}          张博昱   
+99985  童年时的一场见义勇为，让小瀚宇与小慕妍成为彼此生命中最重要的朋友，然而命运戏弄，两人天各一方{\ldots}          张博昱   
+99986  童年时的一场见义勇为，让小瀚宇与小慕妍成为彼此生命中最重要的朋友，然而命运戏弄，两人天各一方{\ldots}          张博昱   
+99987  一个至死不渝的誓言，一段生死离别的爱情，编织着一个爱情故事一个关于信仰的真实传说，一个关于爱{\ldots}          付永强   
+99988  《这一刻爱吧》是由陈奕先导演， 由陈柏霖,吴慷仁,陈庭妮等主演的内地电视剧，共4集，爱奇艺为{\ldots}          陈奕先   
+99989  事事的开始有些出人意表，务农为生的丁大福一家，住在偏僻的农村，长子丁有田在一次抽奖时，幸运得{\ldots}          雷瑞麟   
+99990  公安边防缉毒大剧《铁血雄心》，以“发扬传统，坚定信念，执法为民，践行军人核心价值观”主题，以{\ldots}          王连平   
+99991  唐肃宗年间，因宫廷争斗，太子流落民间并改姓薛，名平贵。薛平贵长大后进长安，遇相国王允三千金宝{\ldots}          林添一   
+99992  唐肃宗年间，因宫廷争斗，太子流落民间并改姓薛，名平贵。薛平贵长大后进长安，遇相国王允三千金宝{\ldots}          林添一   
+99993  在清朝康熙年间，内务府总管纳兰明珠（杜雨露饰）之子纳兰容若（陈浩民饰）爱上了顺治帝陪陵的妃子{\ldots}           梁成   
+99994  30集电视连续剧《剑出江南》，由阎建钢执导，陈浩民，杨若兮，王斑，张蓓蓓，巍子，高兰村等主演{\ldots}      范冬雨/阎建钢   
+99995  传说前世为降龙尊者的济公降生到善人李茂春家中，取名李修缘，后投身灵隐寺，自号“济癫”。在灵隐{\ldots}      林添一/王伟庭   
+99996  该剧改编自小说《济公传》，剧中主要角色济颠和尚在历史上确有其人，他以一个穷和尚之姿，笑闹的性{\ldots}          梁辛全   
+99997  该剧改编自小说《济公传》，剧中主要角色济颠和尚在历史上确有其人，他以一个穷和尚之姿，笑闹的性{\ldots}          梁辛全   
+99998  该剧改编自小说《济公传》，剧中主要角色济颠和尚在历史上确有其人，他以一个穷和尚之姿，笑闹的性{\ldots}          梁辛全   
+99999  该剧改编自小说《济公传》，剧中主要角色济颠和尚在历史上确有其人，他以一个穷和尚之姿，笑闹的性{\ldots}          梁辛全   
+
+            差评数       评分人数           播放量     更新至   总集数  第几季        好评数  
+0        2034.0    32722.0  8.069526e+06     0.0  20.0    2    30688.0  
+1        7291.0    39492.0  7.021392e+07     0.0  32.0    1    32201.0  
+2        1183.0    10105.0  3.310768e+06     0.0  30.0    1     8922.0  
+3         451.0     2639.0  2.088958e+06     0.0  34.0    1     2188.0  
+4       63551.0   748338.0  4.128789e+07     0.0  30.0    1   684787.0  
+5        1632.0    11529.0  3.946404e+06     0.0  21.0    1     9897.0  
+6        8358.0   124810.0  2.270146e+07     0.0  20.0    1   116452.0  
+7        3282.0    27528.0  0.000000e+00     0.0   0.0    1    24246.0  
+8      642608.0  5009885.0  0.000000e+00     0.0   0.0    1  4367277.0  
+9         884.0     3378.0  1.599915e+06     0.0  20.0    1     2494.0  
+10       1668.0     7299.0  0.000000e+00  2012.0   0.0    1     5631.0  
+11        110.0      265.0  3.247750e+05     0.0  20.0    1      155.0  
+12         97.0    24628.0  1.147642e+07     0.0  34.0    1    24531.0  
+13      20094.0   133890.0  1.150000e+08     0.0  45.0    1   113796.0  
+14     393207.0  2265431.0  2.132000e+09     0.0  44.0    1  1872224.0  
+15       5184.0    20003.0  2.527000e+07     0.0  13.0    1    14819.0  
+16       5498.0    45800.0  2.609000e+07     0.0  24.0    1    40302.0  
+17       1027.0    17808.0  1.071000e+07     0.0  29.0    1    16781.0  
+18      19964.0   389736.0  1.220000e+08     0.0  27.0    1   369772.0  
+19       2065.0    10265.0  6.140000e+06     0.0  16.0    1     8200.0  
+20       5458.0    35846.0  3.819000e+07     0.0  30.0    1    30388.0  
+21        963.0     3832.0  1.036000e+07     0.0  26.0    1     2869.0  
+22        279.0      691.0  2.150000e+06     0.0  31.0    1      412.0  
+23        358.0      759.0  1.850000e+06     0.0  26.0    1      401.0  
+24        223.0      554.0  1.240000e+06     0.0  20.0    1      331.0  
+25        104.0      275.0  5.190000e+05     0.0  22.0    1      171.0  
+26         73.0      172.0  4.330000e+05     0.0  24.0    1       99.0  
+27        397.0      936.0  2.130000e+06     0.0  20.0    1      539.0  
+28        440.0      942.0  2.000000e+06     0.0  20.0    1      502.0  
+29        556.0     1375.0  2.390000e+06     0.0  30.0    1      819.0  
+{\ldots}         {\ldots}        {\ldots}           {\ldots}     {\ldots}   {\ldots}  {\ldots}        {\ldots}  
+99970     187.0      452.0  7.090000e+05     0.0  24.0    1      265.0  
+99971  122537.0   578122.0  1.216000e+09     0.0  53.0    1   455624.0  
+99972    3548.0    18621.0  5.237000e+07     0.0   0.0    1    15073.0  
+99973   12533.0   145200.0  8.378000e+07    14.0  15.0    1   132667.0  
+99974     367.0     3042.0  6.440000e+06     0.0   8.0    1     2675.0  
+99975     384.0     7122.0  5.750000e+06     0.0   8.0    2     6738.0  
+99976    2385.0     7229.0  1.685000e+07     0.0  34.0    1     4844.0  
+99977    3402.0    24283.0  6.255000e+07     0.0  35.0    1    20881.0  
+99978    2386.0    10574.0  7.080000e+07     0.0   0.0    1     8188.0  
+99979    7622.0    38680.0  2.244000e+07     0.0  44.0    1    31064.0  
+99980   34752.0   268634.0  6.610000e+08     0.0  44.0    1   233882.0  
+99981    3347.0    15318.0  3.767000e+07     0.0  42.0    1    11975.0  
+99982  228399.0  1787675.0  1.449000e+09     0.0  52.0    1  1559276.0  
+99983    3222.0    38850.0  5.124000e+07     0.0  78.0    1    35628.0  
+99984   21987.0   152049.0  1.120000e+08     0.0  32.0    1   130062.0  
+99985   31041.0   165828.0  1.890000e+08     0.0  58.0    1   134787.0  
+99986   12871.0    73116.0  4.244000e+07     0.0  40.0    1    60247.0  
+99987      76.0      343.0  4.220000e+05     0.0  25.0    1      267.0  
+99988     546.0     3567.0  6.980000e+06     0.0   4.0    1     3021.0  
+99989     731.0     1954.0  3.320000e+06     0.0  19.0    1     1223.0  
+99990     855.0     2761.0  7.410000e+06     0.0  26.0    1     1906.0  
+99991   11185.0   144824.0  3.520000e+08     0.0  55.0    1   133639.0  
+99992     160.0      851.0  1.610000e+06     0.0  48.0    1      691.0  
+99993     139.0      395.0  1.030000e+06     0.0  40.0    1      256.0  
+99994    1123.0     3344.0  4.240000e+06     0.0  30.0    1     2221.0  
+99995   66844.0   585686.0  3.310000e+08     0.0  60.0    2   518844.0  
+99996  149588.0  1547416.0  9.840000e+08     0.0  80.0    1  1397828.0  
+99997    7637.0    45380.0  4.893000e+07     0.0  85.0    1    37743.0  
+99998   51020.0   364915.0  3.840000e+08     0.0  47.0    1   313895.0  
+99999    3448.0    39353.0  3.536000e+07     0.0  53.0    1    35905.0  
+
+[100000 rows x 24 columns]
+          数据获取日期                                                 演员  \textbackslash{}
+0     2016-05-24                                               缺失数据   
+1     2016-05-24                                               缺失数据   
+2     2016-05-24                                               缺失数据   
+3     2016-05-24                                               缺失数据   
+4     2016-05-24                                               缺失数据   
+5     2016-05-24                                               缺失数据   
+6     2016-05-24                                               缺失数据   
+7     2016-05-24                                               缺失数据   
+8     2016-05-24                                               缺失数据   
+9     2016-05-24                                               缺失数据   
+10    2016-05-24                                               缺失数据   
+11    2016-05-24                                               缺失数据   
+12    2016-05-24                                               缺失数据   
+13    2016-05-24          Angelababy/杜淳/陆毅/陈晓/杨蓉/苏青/毛晓彤/包贝尔/寇振海/刘冠翔   
+14    2016-05-24  Angelababy/杜淳/陆毅/陈晓/杨蓉/苏青/毛晓彤/包贝尔/寇振海/刘冠翔/阚清子/张雅萌   
+15    2016-05-24  Dean Winters/Josh Duhamel/Kal Penn/Aubrey Doll{\ldots}   
+16    2016-05-24                ELLA/吴尊/汪东城/唐禹哲/唐治平/阮经天/张皓明/龚继安/郭静纯   
+17    2016-05-24                     Nichkhun/徐璐/蒋劲夫/魏大勋/朱丹/周晓鸥/于文文   
+18    2016-05-24           Nichkhun/徐璐/蒋劲夫/魏大勋/朱丹/周晓鸥/于文文/高珑珂/孟佳/李昶   
+19    2016-05-24                                        UEE/崔宇植/任瑟雍   
+20    2016-05-24        Weir Sukollwat/Usamanee Vaithayanon/查亚鹏·普帕特   
+21    2016-05-24                                                丁勇岱   
+22    2016-05-24                                     丁勇岱/刘威葳/郭涛/周晓鸥   
+23    2016-05-24                                             丁勇岱/刘欣   
+24    2016-05-24                                     丁勇岱/梁静/刘金山/海一天   
+25    2016-05-24                                             丁勇岱/谢兰   
+26    2016-05-24                             丁勇岱/陈瑾/曹克难/石维坚/王诗槐/宋春丽   
+27    2016-05-24                              丁志成/张彤/王海地/沈丹萍/赵曦/尹国华   
+28    2016-05-24                                             丁志诚/刘斌   
+29    2016-05-24                          丁志诚/郝蕾/傅 彪/鲍国安/徐 峥/崔 波/何琳   
+{\ldots}          {\ldots}                                                {\ldots}   
+99970 2016-04-09                                  陈建斌/高明/苏可/伊春德/潘晓莉   
+99971 2016-04-09              陈思诚/王丽坤/于荣光/阚清子/矢野浩二/张鹰/杜淳/李光洁/严屹宽/于震   
+99972 2016-04-09                        陈意涵/千正明/王钧赫/汤镇宗/牟星/马睿/博弘/沈航   
+99973 2016-04-09                                    陈意涵/崔始源/李东海/白歆惠   
+99974 2016-04-09                       陈意涵/薛仕凌/鲁诺/耿明吉/董路/杨子仪/金雨淳/赵雷   
+99975 2016-04-09                       陈意涵/薛仕凌/鲁诺/耿明吉/董路/杨子仪/金雨淳/赵雷   
+99976 2016-04-09          陈数/孙淳/翟天临/种丹妮/鲍大志/梁丽/师春玲/张宁益/孙浩浩/李涓/赵骏/刑城   
+99977 2016-04-09                        陈数/王雷/张丹妮/张鲁一/韩青/谢园/马澜菲/张小磊   
+99978 2016-04-09                   陈昭荣/陈德容/斓曦/罗琪琪/李雨泽/吴雨桐/董可飞/郭军/田丽   
+99979 2016-04-09                                                 陈晓   
+99980 2016-04-09                   陈晓/郑爽/严屹宽/刘德凯/梁冠华/谢宁/马书良/张芷溪/饶晓志   
+99981 2016-04-09                   陈晓/郑爽/严屹宽/张芷溪/刘德凯/梁冠华/谢宁/马书良/饶晓志   
+99982 2016-04-09  陈晓/陈妍希/张馨予/吴磊/杨明娜/郑国霖/毛晓彤/赵韩樱子/孙耀琦/邬靖靖/宋洋/张雪迎/{\ldots}   
+99983 2016-04-09            陈晓东/唐艺昕/徐正曦/毛林林/孙骁骁/金泽灏/胡彩虹/张籽沐/杨志雯/张逸杰   
+99984 2016-04-09         陈晓东/唐艺昕/徐正曦/毛林林/孙骁骁/金泽灏/胡彩虹/杨志雯/张逸杰/张籽沐/张岩   
+99985 2016-04-09         陈晓东/唐艺昕/徐正曦/毛林林/孙骁骁/金泽灏/胡彩虹/杨志雯/张逸杰/张籽沐/张岩   
+99986 2016-04-09         陈晓东/唐艺昕/徐正曦/毛林林/孙骁骁/金泽灏/胡彩虹/杨志雯/张逸杰/张籽沐/张岩   
+99987 2016-04-09                                        陈晓东/李冰冰/高圆圆   
+99988 2016-04-09                                    陈柏霖/吴慷仁/陈庭妮/柯震东   
+99989 2016-04-09                                         陈法蓉/谢园/苗乙乙   
+99990 2016-04-09                               陈洁/孙玮/申军谊/高一玮/吴晓东/胡桑   
+99991 2016-04-09                   陈浩民/宣萱/馨子/李进荣/张亮/郑鹏飞/涂黎曼/张咏棋/陈怡真   
+99992 2016-04-09                   陈浩民/宣萱/馨子/李进荣/张亮/郑鹏飞/涂黎曼/张咏棋/陈怡真   
+99993 2016-04-09                             陈浩民/杜雨露/张晨光/归亚蕾/高圆圆/郝蕾   
+99994 2016-04-09                                  陈浩民/杨若兮/王斑/张蓓蓓/巍子   
+99995 2016-04-09                               陈浩民/林子聪/叶祖新/周觅/馨子/张亮   
+99996 2016-04-09                         陈浩民/林子聪/陈威翰/唐熙/陈紫函/穆婷婷/关智斌   
+99997 2016-04-09                         陈浩民/林子聪/陈威翰/唐熙/陈紫函/穆婷婷/关智斌   
+99998 2016-04-09                         陈浩民/林子聪/陈威翰/唐熙/陈紫函/穆婷婷/关智斌   
+99999 2016-04-09                         陈浩民/林子聪/陈威翰/唐熙/陈紫函/穆婷婷/关智斌   
+
+            视频ID                                        详细链接              剧名  \textbackslash{}
+0            100  http://www.iqiyi.com/dianshiju/douyu2.html     斗鱼Ⅱ(1-20)全集   
+1           1037   http://www.iqiyi.com/dianshiju/jhuxd.html    江湖兄弟(1-32)全集   
+2           1573  http://www.iqiyi.com/dianshiju/fmxqj2.html  肥猫寻亲记2(1-30)全集   
+3           1739    http://www.iqiyi.com/dianshiju/qtjm.html    舞台姐妹(1-34)全集   
+4           1756   http://www.iqiyi.com/dianshiju/18jbj.html   18禁不禁(1-30)全集   
+5           1757  http://www.iqiyi.com/dianshiju/18sdtk.html  18岁的约定(1-21)全集   
+6           1837      http://www.iqiyi.com/dianshiju/dy.html      斗鱼(1-20)全集   
+7      200175401      http://www.iqiyi.com/a\_19rrgjd745.html          人生需要揭穿   
+8      202938201      http://www.iqiyi.com/a\_19rrhb9eet.html           太阳的后裔   
+9           2212   http://www.iqiyi.com/dianshiju/yjjhx.html   又见橘花香(1-20)全集   
+10        231776      http://www.iqiyi.com/a\_19rrk743u5.html           穿帮集中营   
+11          2415    http://www.iqiyi.com/dianshiju/lhgs.html    离婚官司(1-20)全集   
+12          2724    http://www.iqiyi.com/dianshiju/ssdl.html    生死谍恋(1-34)全集   
+13     202981401      http://www.iqiyi.com/a\_19rrhb6w6t.html    大汉情缘之云中歌未删减版   
+14     201098501      http://www.iqiyi.com/a\_19rrgip3zd.html        大汉情缘之云中歌   
+15     202536601      http://www.iqiyi.com/a\_19rrhazr3p.html         错配搭档第1季   
+16     202249701      http://www.iqiyi.com/a\_19rrhc3m2x.html          花样少年少女   
+17     201180401      http://www.iqiyi.com/a\_19rrgind0d.html   一又二分之一的夏天未删减版   
+18     200745001      http://www.iqiyi.com/a\_19rrgiefd1.html       一又二分之一的夏天   
+19     203338201      http://www.iqiyi.com/a\_19rrhbhos5.html           浩九的爱情   
+20     202170101      http://www.iqiyi.com/a\_19rrhc16zd.html          命定之爱国语   
+21     203259601      http://www.iqiyi.com/a\_19rrhbcfr1.html          末路1997   
+22     202275801      http://www.iqiyi.com/a\_19rrhc354l.html              暗伤   
+23     203103101      http://www.iqiyi.com/a\_19rrhba61d.html              威胁   
+24     202276001      http://www.iqiyi.com/a\_19rrhc34y5.html             水晶眼   
+25     202992201      http://www.iqiyi.com/a\_19rrhb6qzp.html              驼道   
+26     202997401      http://www.iqiyi.com/a\_19rrhb6tit.html            不堪回首   
+27        159347      http://www.iqiyi.com/a\_19rrifkjz3.html            凝视黑夜   
+28     202808701      http://www.iqiyi.com/a\_19rrhb6n81.html            永不言败   
+29     200800301      http://www.iqiyi.com/a\_19rrgiewqp.html            新铡美案   
+{\ldots}          {\ldots}                                         {\ldots}             {\ldots}   
+99970  203258401      http://www.iqiyi.com/a\_19rrhbcggd.html            最后诊断   
+99971  202122901      http://www.iqiyi.com/a\_19rrhc0jcp.html              战神   
+99972  200431101      http://www.iqiyi.com/a\_19rrgia3kh.html           亲情保卫战   
+99973     145230      http://www.iqiyi.com/a\_19rrk1ylqt.html           华丽的挑战   
+99974     115684      http://www.iqiyi.com/a\_19rrk3vmyl.html        恋爱SOS第一季   
+99975     117070      http://www.iqiyi.com/a\_19rrk3yaad.html        恋爱SOS第二季   
+99976  202720501      http://www.iqiyi.com/a\_19rrhb195l.html              剧场   
+99977  202171401      http://www.iqiyi.com/a\_19rrhc0w9x.html            谈判冤家   
+99978     365163      http://www.iqiyi.com/a\_19rrjytnoh.html         下辈子还嫁给你   
+99979  202318101      http://www.iqiyi.com/a\_19rrhc1yt5.html     神雕侠侣陈晓版杨过特辑   
+99980  203404701      http://www.iqiyi.com/a\_19rrhbg9gx.html           五鼠闹东京   
+99981  203622401      http://www.iqiyi.com/a\_19rrhacdwt.html       五鼠闹东京未删减版   
+99982  202260501      http://www.iqiyi.com/a\_19rrhc3795.html            神雕侠侣   
+99983  200604901      http://www.iqiyi.com/a\_19rrgidhft.html        加油爱人未删减版   
+99984  200604501      http://www.iqiyi.com/a\_19rrgidhkp.html            加油爱人   
+99985  200686101      http://www.iqiyi.com/a\_19rrgifybd.html            幸福爱人   
+99986  200686201      http://www.iqiyi.com/a\_19rrgify8l.html        幸福爱人未删减版   
+99987  203262201      http://www.iqiyi.com/a\_19rrhbdlzp.html            海的誓言   
+99988     419941      http://www.iqiyi.com/a\_19rrjvvel5.html           这一刻爱吧   
+99989  202264001      http://www.iqiyi.com/a\_19rrhc37vx.html            富贵临门   
+99990  202989901      http://www.iqiyi.com/a\_19rrhb6plt.html            铁血雄心   
+99991     171735      http://www.iqiyi.com/a\_19rrjzq32p.html         薛平贵与王宝钏   
+99992  203793301      http://www.iqiyi.com/a\_19rrhafny1.html      薛平贵与王宝钏央视版   
+99993  203790601      http://www.iqiyi.com/a\_19rrhafzad.html            烟花三月   
+99994  203257801      http://www.iqiyi.com/a\_19rrhbcdyd.html            剑出江南   
+99995     123614      http://www.iqiyi.com/a\_19rrk33ec5.html           活佛济公2   
+99996  202112301      http://www.iqiyi.com/a\_19rrhbwt35.html           新济公活佛   
+99997  202112401      http://www.iqiyi.com/a\_19rrhbwt8d.html       新济公活佛未删减版   
+99998  203114101      http://www.iqiyi.com/a\_19rrhb9o2h.html         新济公活佛下部   
+99999  203114801      http://www.iqiyi.com/a\_19rrhb9qot.html     新济公活佛下部未删减版   
+
+         状态                                 类型 来源平台      整理后剧名  \textbackslash{}
+0       已完结              粤语电视剧/偶像剧/言情剧/超清1080P  爱奇艺        斗鱼2   
+1       已完结              粤语电视剧/悬疑剧/年代剧/超清1080P  爱奇艺     江湖兄弟全集   
+2       已完结                       粤语电视剧/家庭剧/喜剧  爱奇艺   肥猫寻亲记2全集   
+3       已完结                      粤语电视剧/年代剧/家庭剧  爱奇艺     舞台姐妹全集   
+4       已完结               粤语电视剧/偶像剧/超清1080P/喜剧  爱奇艺    18禁不禁全集   
+5       已完结              粤语电视剧/偶像剧/言情剧/超清1080P  爱奇艺   18岁的约定全集   
+6       已完结              粤语电视剧/偶像剧/言情剧/超清1080P  爱奇艺       斗鱼全集   
+7      缺失数据   粤语电视剧/超清1080P/偶像剧/家庭剧/青春剧/网络剧/喜剧  爱奇艺     人生需要揭穿   
+8      缺失数据           粤语电视剧/偶像剧/剧情/言情剧/超清1080P  爱奇艺      太阳的后裔   
+9       已完结      粤语电视剧/偶像剧/言情剧/超清1080P/青春剧/家庭剧  爱奇艺    又见橘花香全集   
+10      更新中               喜剧/穿越剧/粤语电视剧/超清1080P  爱奇艺      穿帮集中营   
+11      已完结                   粤语电视剧/剧情/家庭剧/青春剧  爱奇艺     离婚官司全集   
+12      已完结          粤语电视剧/谍战剧/超清1080P/言情剧/军旅剧  爱奇艺     生死谍恋全集   
+13      已完结      宫廷剧/古装剧/偶像剧/言情剧/粤语电视剧/超清1080P  爱奇艺   大汉情缘之云中歌   
+14      已完结  言情剧/古装剧/偶像剧/宫廷剧/青春剧/粤语电视剧/超清1080P  爱奇艺   大汉情缘之云中歌   
+15      已完结            喜剧/罪案剧/剧情/粤语电视剧/超清1080P  爱奇艺       错配搭档   
+16      已完结          言情剧/偶像剧/青春剧/粤语电视剧/超清1080P  爱奇艺     花样少年少女   
+17      已完结          青春剧/言情剧/偶像剧/粤语电视剧/超清1080P  爱奇艺  1又2分之1的夏天   
+18      已完结          青春剧/言情剧/偶像剧/粤语电视剧/超清1080P  爱奇艺  1又2分之1的夏天   
+19      已完结            言情剧/剧情/都市/粤语电视剧/超清1080P  爱奇艺      浩9的爱情   
+20      已完结       偶像剧/言情剧/剧情/年代剧/粤语电视剧/超清1080P  爱奇艺     命定之爱国语   
+21      已完结               罪案剧/剧情/粤语电视剧/超清1080P  爱奇艺     末路1997   
+22      已完结                        剧情/都市/粤语电视剧  爱奇艺         暗伤   
+23      已完结                    剧情/都市/悬疑剧/粤语电视剧  爱奇艺         威胁   
+24      已完结                    罪案剧/剧情/都市/粤语电视剧  爱奇艺        水晶眼   
+25      已完结           言情剧/剧情/年代剧/粤语电视剧/超清1080P  爱奇艺         驼道   
+26      已完结                    罪案剧/剧情/都市/粤语电视剧  爱奇艺       不堪回首   
+27      已完结                       罪案剧/剧情/粤语电视剧  爱奇艺       凝视黑夜   
+28      已完结                       剧情/悬疑剧/粤语电视剧  爱奇艺       永不言败   
+29      已完结                   宫廷剧/古装剧/剧情/粤语电视剧  爱奇艺       新铡美案   
+{\ldots}     {\ldots}                                {\ldots}  {\ldots}        {\ldots}   
+99970   已完结                 言情剧/剧情/悬疑剧/超清1080P  爱奇艺       最后诊断   
+99971   已完结                         军旅剧/历史剧/剧情  爱奇艺         战神   
+99972  缺失数据                        家庭剧/言情剧/偶像剧  爱奇艺      亲情保卫战   
+99973   更新中                        青春剧/言情剧/偶像剧  爱奇艺      华丽的挑战   
+99974   已完结                        青春剧/言情剧/偶像剧  爱奇艺      恋爱sos   
+99975   已完结                        青春剧/言情剧/偶像剧  爱奇艺     恋爱sos2   
+99976   已完结                      言情剧/年代剧/剧情/都市  爱奇艺         剧场   
+99977   已完结                         都市/言情剧/偶像剧  爱奇艺       谈判冤家   
+99978  缺失数据                        家庭剧/言情剧/年代剧  爱奇艺    下辈子还嫁给你   
+99979   已完结                 剧情/言情剧/武侠剧/古装剧/偶像剧  爱奇艺   神雕侠侣杨过特辑   
+99980   已完结                            武侠剧/古装剧  爱奇艺      5鼠闹东京   
+99981   已完结                    言情剧/武侠剧/古装剧/偶像剧  爱奇艺      5鼠闹东京   
+99982   已完结                    言情剧/武侠剧/古装剧/偶像剧  爱奇艺       神雕侠侣   
+99983   已完结                     青春剧/言情剧/都市/偶像剧  爱奇艺       加油爱人   
+99984   已完结                     青春剧/言情剧/都市/偶像剧  爱奇艺       加油爱人   
+99985   已完结                     青春剧/言情剧/都市/偶像剧  爱奇艺       幸福爱人   
+99986   已完结                     青春剧/言情剧/都市/偶像剧  爱奇艺       幸福爱人   
+99987   已完结                  言情剧/剧情/都市/超清1080P  爱奇艺       海的誓言   
+99988   已完结                    青春剧/言情剧/网络剧/偶像剧  爱奇艺      这1刻爱吧   
+99989   已完结                          喜剧/家庭剧/都市  爱奇艺       富贵临门   
+99990   已完结                             罪案剧/剧情  爱奇艺       铁血雄心   
+99991   已完结                            言情剧/古装剧  爱奇艺    薛平贵与王宝钏   
+99992   已完结                        宫廷剧/言情剧/古装剧  爱奇艺    薛平贵与王宝钏   
+99993   已完结                    宫廷剧/古装剧/超清1080P  爱奇艺       烟花3月   
+99994   已完结                 武侠剧/古装剧/剧情/超清1080P  爱奇艺       剑出江南   
+99995   已完结                         喜剧/神话剧/古装剧  爱奇艺      活佛济公2   
+99996   已完结                     神话剧/武侠剧/古装剧/剧情  爱奇艺      新济公活佛   
+99997   已完结                     神话剧/武侠剧/古装剧/剧情  爱奇艺      新济公活佛   
+99998   已完结                            神话剧/古装剧  爱奇艺    新济公活佛下部   
+99999   已完结                            神话剧/古装剧  爱奇艺    新济公活佛下部   
+
+                   更新时间    {\ldots}        上映年份  \textbackslash{}
+0                  缺失数据    {\ldots}      2004.0   
+1                  缺失数据    {\ldots}      2008.0   
+2                  缺失数据    {\ldots}      2005.0   
+3                  缺失数据    {\ldots}      2006.0   
+4                  缺失数据    {\ldots}      2007.0   
+5                  缺失数据    {\ldots}      2002.0   
+6                  缺失数据    {\ldots}      2004.0   
+7                  缺失数据    {\ldots}         0.0   
+8                  缺失数据    {\ldots}         0.0   
+9                  缺失数据    {\ldots}      2003.0   
+10                 缺失数据    {\ldots}      2012.0   
+11                 缺失数据    {\ldots}      2007.0   
+12                 缺失数据    {\ldots}      2008.0   
+13                 缺失数据    {\ldots}         0.0   
+14                 缺失数据    {\ldots}         0.0   
+15                 缺失数据    {\ldots}         0.0   
+16                 缺失数据    {\ldots}      2006.0   
+17                 缺失数据    {\ldots}         0.0   
+18                 缺失数据    {\ldots}         0.0   
+19                 缺失数据    {\ldots}      2015.0   
+20                 缺失数据    {\ldots}      2007.0   
+21                 缺失数据    {\ldots}      2000.0   
+22                 缺失数据    {\ldots}      2006.0   
+23                 缺失数据    {\ldots}      2003.0   
+24                 缺失数据    {\ldots}      2006.0   
+25                 缺失数据    {\ldots}      1995.0   
+26                 缺失数据    {\ldots}      2005.0   
+27                 缺失数据    {\ldots}      2001.0   
+28                 缺失数据    {\ldots}      2005.0   
+29                 缺失数据    {\ldots}      2005.0   
+{\ldots}                 {\ldots}    {\ldots}         {\ldots}   
+99970              缺失数据    {\ldots}      2004.0   
+99971              缺失数据    {\ldots}         0.0   
+99972              缺失数据    {\ldots}         0.0   
+99973  每周一下午14:00跟播1集 分    {\ldots}         0.0   
+99974              缺失数据    {\ldots}      2011.0   
+99975              缺失数据    {\ldots}      2011.0   
+99976              缺失数据    {\ldots}      2015.0   
+99977              缺失数据    {\ldots}      2014.0   
+99978              缺失数据    {\ldots}      2013.0   
+99979              缺失数据    {\ldots}         0.0   
+99980              缺失数据    {\ldots}         0.0   
+99981              缺失数据    {\ldots}      2016.0   
+99982              缺失数据    {\ldots}         0.0   
+99983              缺失数据    {\ldots}         0.0   
+99984              缺失数据    {\ldots}         0.0   
+99985              缺失数据    {\ldots}      2014.0   
+99986              缺失数据    {\ldots}      2014.0   
+99987              缺失数据    {\ldots}      2004.0   
+99988              缺失数据    {\ldots}         0.0   
+99989              缺失数据    {\ldots}      2002.0   
+99990              缺失数据    {\ldots}      2012.0   
+99991              缺失数据    {\ldots}         0.0   
+99992              缺失数据    {\ldots}      2012.0   
+99993              缺失数据    {\ldots}      2005.0   
+99994              缺失数据    {\ldots}      2005.0   
+99995              缺失数据    {\ldots}      2011.0   
+99996              缺失数据    {\ldots}         0.0   
+99997              缺失数据    {\ldots}         0.0   
+99998              缺失数据    {\ldots}         0.0   
+99999              缺失数据    {\ldots}         0.0   
+
+                                                      简介           导演  \textbackslash{}
+0      在单子杀了阿豹派去强暴语燕的手下而入狱后，众人的生活都有了改变。语燕为了让自己不再是于皓的包{\ldots}         缺失数据   
+1      1930年代，海龙城首富唐英明用五斗上等珍珠，击败列国商业对手，买得与铁达尼齐名之奥丽号邮轮{\ldots}         缺失数据   
+2      肥猫经历了几番风雨，终于寻回了他的亲生弟妹们：年轻有为的医生二弟华世杰、大律师三妹婉容、美丽{\ldots}         缺失数据   
+3      一对原本乡下“阳春舞台班“苦命姐妹春花和月红，在戏霸唐经理的阴谋算计下来到大上海的灯红酒绿下{\ldots}         缺失数据   
+4      一部台湾偶像剧，由三个偶像团体（模范棒棒堂Choc7、黑Girl、翼势力）的成员和多位新进演{\ldots}         缺失数据   
+5      何帆，是一个天才型调酒师，也是各高校极欲网罗的名师对象。晓彤，班上的一名女学生。在日积月累之{\ldots}         缺失数据   
+6      两个世界的人，可以是朋友、可以是仇人、可以错身而过，但是如果他们相爱了，结局只有走上灭绝的命{\ldots}         缺失数据   
+7                               人生需要揭穿-统帅电器-高清视频在线观看-爱奇艺         缺失数据   
+8      《太阳的后裔》是由李应福导演，由宋仲基、宋慧乔等主演的电视剧，共16集，爱奇艺为你提供太阳的{\ldots}         缺失数据   
+9      每一次恋爱，有多少回忆停驻在你的脑海里？初恋的滋味，总是带点甜蜜，带点苦涩。杜凯翔接到小学同{\ldots}         缺失数据   
+10     《穿帮集中营》是互联网首档专门揭示点评热门电视剧穿帮镜头的点评类节目，由中国第一高清影视门户{\ldots}          剧视电   
+11     本剧以一位民事法庭人民法官的主观视角，讲述了十个看似平淡，却意蕴悠长的离婚案件，揭示了中国当{\ldots}         缺失数据   
+12     反击日寇的谍报战场上，共产党员夏潇雪与国民党员唐问生不期而遇，他们相互爱恋，却又相互刺探防备{\ldots}         缺失数据   
+13     西汉时期(公元80年)，年少的汉昭帝刘弗陵在荒漠迷途，得女孩云歌带其走出荒漠，刘弗陵最终被精{\ldots}  胡意涓/胡明凯/蔡晶盛   
+14     西汉时期(公元80年)，年少的汉昭帝刘弗陵在荒漠迷途，得女孩云歌带其走出荒漠，刘弗陵最终被精{\ldots}  胡意涓/胡明凯/蔡晶盛   
+15     《绝命毒师》创作人Vince Gilligan和《豪斯医生》创作人David Shore将强{\ldots}       布莱恩·辛格   
+16     瑞莃因为崇拜跳高选手左以泉，所以千里迢迢回国女扮男装进入与泉同一所男校念书，而且幸运的和泉同{\ldots}      林清芳/王明台   
+17     《一又二分之一的夏天》是由中韩合作的校园浪漫清甜派偶像剧，分别于厦门，北京和希腊取景拍摄。本{\ldots}          张林子   
+18     《一又二分之一的夏天》是由中韩合作的校园浪漫清甜派偶像剧，分别于厦门，北京和希腊取景拍摄。本{\ldots}          张林子   
+19     该剧翻拍自韩国同名网络漫画，讲述了从未谈过恋爱的母胎单身男姜浩九（崔宇植饰）、游泳女神都桃姬{\ldots}          表民洙   
+20     该剧讲述的是虚构的三个国家Tanta、Panturath、Kasik，Tanta的国王、公主{\ldots}           未知   
+21     白宝山原本拥有一个正常的家庭，却因为一念之差堕入了罪恶的深渊。20世纪80年代，他被收监，在{\ldots}          陈国军   
+22     民三年来，龙在天——这个游走在法律边缘的神秘客，已经成为石坊市的传奇人物。如今，通过叶蓓主持{\ldots}          高群书   
+23     深夜，大火，奔涌肆虐的地下之火，无情地吞噬着井下的矿工。救护车警笛声声，溪平不眠，溪平煤矿发{\ldots}          陈国军   
+24     雷鸣、麦欧在侦破的过程也同样经受着种种考验，其间既有个人感情与国家利益的冲突、也有引导罪犯走{\ldots}           常猛   
+25     驼道，以著名商号“大盛魁”的兴衰为背景，以主人公古海的命运为主线，生动地描绘了一代晋商不屈不{\ldots}          史晨风   
+26     30 万元是一条无形的锁链，将出身贫寒、正直清廉的戚新军死死套牢。随着澳华工贸集团靠侵吞国有{\ldots}          唐敬睿   
+27     白浪滩大型开发项目即将全面展开，这时，白浪村村委会主任巫林伟却突然。天北集团副总经理古良得知{\ldots}          陈胜利   
+28     本剧通过刑警、法医运用刑事侦查技术手段侦破贩毒凶杀案的特殊案例，表现和歌颂了我国公安干警和刑{\ldots}          张来京   
+29     抛妻弃子,攀龙附凤,谁解个中由?亦正亦邪,扶摇直上,只为洗心仇! 一场深宫血雨腥风,一段悲情{\ldots}          陈晓雷   
+{\ldots}                                                  {\ldots}          {\ldots}   
+99970  海归派神经外科医学博士沈知鱼来到地方某大医院工作。初一到岗，便完成数例高难度神外手术，因此受{\ldots}           王瑞   
+99971  太行山一带，八路军游击队司令龙大谷骁勇善战，机智过人，15岁就参加了红军，身经百战，被军中将{\ldots}          国建勇   
+99972  人的一生存在着无数选择，唯有一样全凭上天决定，那就是血缘亲情。随着时代的发展，人们之间的情感{\ldots}          蒋凯宸   
+99973  根据日本超人气漫画改编，崔始源，李东海争相卖萌，宠翻小天后陈意涵。女主角宫囍是个不打扮，每天{\ldots}          冯家瑞   
+99974  本剧讲述了一个颇具戏剧性的故事，四个要债人因为同时追缴欠款凑到一起，他们想尽办法终于成功地将{\ldots}          宋坤儒   
+99975  《恋爱SOS》第一季讲述了一个颇具戏剧性的故事，四个要债人因为同时追缴欠款凑到一起，他们想尽{\ldots}          宋坤儒   
+99976  本剧讲述上世纪80年代一个小城话剧团的悲欢离合。年过四十的女演员郁珠在当地家喻户晓，演技精湛{\ldots}          杨文军   
+99977  乔楚是家地产公司的公关经理，事业成功生活幸福。在十周年结婚纪念日当天，丈夫方杰突然失踪，留给{\ldots}           杨磊   
+99978  美丽聪慧的沈云娘邂逅男子傅文旭，两人相爱，云娘自小受到同父异母的哥哥沈万生的欺凌，虽天生命苦{\ldots}           罗福   
+99979  《神雕侠侣陈晓版杨过特辑》是由李慧珠导演， 由陈晓等主演的内地电视剧，共44集，爱奇艺为你提{\ldots}          李慧珠   
+99980  北宋年间陷空岛住着五个结拜兄弟绰号“五鼠”，江湖南侠展昭因佑护包公有功被宋仁宗赐 “御猫”封{\ldots}          吴家骀   
+99981  北宋年间陷空岛住着五个结拜兄弟绰号“五鼠”，江湖南侠展昭因佑护包公有功被宋仁宗赐 “御猫”封{\ldots}          吴家骀   
+99982  2014年内地版《神雕侠侣》主要讲述了南宋末年，杨过和小龙女经历了一番凄美爱情与江湖恩怨的故{\ldots}          李慧珠   
+99983  童年时的一场见义勇为，让小瀚宇与小慕妍成为彼此生命中最重要的朋友，然而命运戏弄，两人天各一方{\ldots}          张博昱   
+99984  童年时的一场见义勇为，让小瀚宇与小慕妍成为彼此生命中最重要的朋友，然而命运戏弄，两人天各一方{\ldots}          张博昱   
+99985  童年时的一场见义勇为，让小瀚宇与小慕妍成为彼此生命中最重要的朋友，然而命运戏弄，两人天各一方{\ldots}          张博昱   
+99986  童年时的一场见义勇为，让小瀚宇与小慕妍成为彼此生命中最重要的朋友，然而命运戏弄，两人天各一方{\ldots}          张博昱   
+99987  一个至死不渝的誓言，一段生死离别的爱情，编织着一个爱情故事一个关于信仰的真实传说，一个关于爱{\ldots}          付永强   
+99988  《这一刻爱吧》是由陈奕先导演， 由陈柏霖,吴慷仁,陈庭妮等主演的内地电视剧，共4集，爱奇艺为{\ldots}          陈奕先   
+99989  事事的开始有些出人意表，务农为生的丁大福一家，住在偏僻的农村，长子丁有田在一次抽奖时，幸运得{\ldots}          雷瑞麟   
+99990  公安边防缉毒大剧《铁血雄心》，以“发扬传统，坚定信念，执法为民，践行军人核心价值观”主题，以{\ldots}          王连平   
+99991  唐肃宗年间，因宫廷争斗，太子流落民间并改姓薛，名平贵。薛平贵长大后进长安，遇相国王允三千金宝{\ldots}          林添一   
+99992  唐肃宗年间，因宫廷争斗，太子流落民间并改姓薛，名平贵。薛平贵长大后进长安，遇相国王允三千金宝{\ldots}          林添一   
+99993  在清朝康熙年间，内务府总管纳兰明珠（杜雨露饰）之子纳兰容若（陈浩民饰）爱上了顺治帝陪陵的妃子{\ldots}           梁成   
+99994  30集电视连续剧《剑出江南》，由阎建钢执导，陈浩民，杨若兮，王斑，张蓓蓓，巍子，高兰村等主演{\ldots}      范冬雨/阎建钢   
+99995  传说前世为降龙尊者的济公降生到善人李茂春家中，取名李修缘，后投身灵隐寺，自号“济癫”。在灵隐{\ldots}      林添一/王伟庭   
+99996  该剧改编自小说《济公传》，剧中主要角色济颠和尚在历史上确有其人，他以一个穷和尚之姿，笑闹的性{\ldots}          梁辛全   
+99997  该剧改编自小说《济公传》，剧中主要角色济颠和尚在历史上确有其人，他以一个穷和尚之姿，笑闹的性{\ldots}          梁辛全   
+99998  该剧改编自小说《济公传》，剧中主要角色济颠和尚在历史上确有其人，他以一个穷和尚之姿，笑闹的性{\ldots}          梁辛全   
+99999  该剧改编自小说《济公传》，剧中主要角色济颠和尚在历史上确有其人，他以一个穷和尚之姿，笑闹的性{\ldots}          梁辛全   
+
+            差评数       评分人数           播放量     更新至   总集数  第几季        好评数  
+0        2034.0    32722.0  8.069526e+06     0.0  20.0    2    30688.0  
+1        7291.0    39492.0  7.021392e+07     0.0  32.0    1    32201.0  
+2        1183.0    10105.0  3.310768e+06     0.0  30.0    1     8922.0  
+3         451.0     2639.0  2.088958e+06     0.0  34.0    1     2188.0  
+4       63551.0   748338.0  4.128789e+07     0.0  30.0    1   684787.0  
+5        1632.0    11529.0  3.946404e+06     0.0  21.0    1     9897.0  
+6        8358.0   124810.0  2.270146e+07     0.0  20.0    1   116452.0  
+7        3282.0    27528.0  0.000000e+00     0.0   0.0    1    24246.0  
+8      642608.0  5009885.0  0.000000e+00     0.0   0.0    1  4367277.0  
+9         884.0     3378.0  1.599915e+06     0.0  20.0    1     2494.0  
+10       1668.0     7299.0  0.000000e+00  2012.0   0.0    1     5631.0  
+11        110.0      265.0  3.247750e+05     0.0  20.0    1      155.0  
+12         97.0    24628.0  1.147642e+07     0.0  34.0    1    24531.0  
+13      20094.0   133890.0  1.150000e+08     0.0  45.0    1   113796.0  
+14     393207.0  2265431.0  2.132000e+09     0.0  44.0    1  1872224.0  
+15       5184.0    20003.0  2.527000e+07     0.0  13.0    1    14819.0  
+16       5498.0    45800.0  2.609000e+07     0.0  24.0    1    40302.0  
+17       1027.0    17808.0  1.071000e+07     0.0  29.0    1    16781.0  
+18      19964.0   389736.0  1.220000e+08     0.0  27.0    1   369772.0  
+19       2065.0    10265.0  6.140000e+06     0.0  16.0    1     8200.0  
+20       5458.0    35846.0  3.819000e+07     0.0  30.0    1    30388.0  
+21        963.0     3832.0  1.036000e+07     0.0  26.0    1     2869.0  
+22        279.0      691.0  2.150000e+06     0.0  31.0    1      412.0  
+23        358.0      759.0  1.850000e+06     0.0  26.0    1      401.0  
+24        223.0      554.0  1.240000e+06     0.0  20.0    1      331.0  
+25        104.0      275.0  5.190000e+05     0.0  22.0    1      171.0  
+26         73.0      172.0  4.330000e+05     0.0  24.0    1       99.0  
+27        397.0      936.0  2.130000e+06     0.0  20.0    1      539.0  
+28        440.0      942.0  2.000000e+06     0.0  20.0    1      502.0  
+29        556.0     1375.0  2.390000e+06     0.0  30.0    1      819.0  
+{\ldots}         {\ldots}        {\ldots}           {\ldots}     {\ldots}   {\ldots}  {\ldots}        {\ldots}  
+99970     187.0      452.0  7.090000e+05     0.0  24.0    1      265.0  
+99971  122537.0   578122.0  1.216000e+09     0.0  53.0    1   455624.0  
+99972    3548.0    18621.0  5.237000e+07     0.0   0.0    1    15073.0  
+99973   12533.0   145200.0  8.378000e+07    14.0  15.0    1   132667.0  
+99974     367.0     3042.0  6.440000e+06     0.0   8.0    1     2675.0  
+99975     384.0     7122.0  5.750000e+06     0.0   8.0    2     6738.0  
+99976    2385.0     7229.0  1.685000e+07     0.0  34.0    1     4844.0  
+99977    3402.0    24283.0  6.255000e+07     0.0  35.0    1    20881.0  
+99978    2386.0    10574.0  7.080000e+07     0.0   0.0    1     8188.0  
+99979    7622.0    38680.0  2.244000e+07     0.0  44.0    1    31064.0  
+99980   34752.0   268634.0  6.610000e+08     0.0  44.0    1   233882.0  
+99981    3347.0    15318.0  3.767000e+07     0.0  42.0    1    11975.0  
+99982  228399.0  1787675.0  1.449000e+09     0.0  52.0    1  1559276.0  
+99983    3222.0    38850.0  5.124000e+07     0.0  78.0    1    35628.0  
+99984   21987.0   152049.0  1.120000e+08     0.0  32.0    1   130062.0  
+99985   31041.0   165828.0  1.890000e+08     0.0  58.0    1   134787.0  
+99986   12871.0    73116.0  4.244000e+07     0.0  40.0    1    60247.0  
+99987      76.0      343.0  4.220000e+05     0.0  25.0    1      267.0  
+99988     546.0     3567.0  6.980000e+06     0.0   4.0    1     3021.0  
+99989     731.0     1954.0  3.320000e+06     0.0  19.0    1     1223.0  
+99990     855.0     2761.0  7.410000e+06     0.0  26.0    1     1906.0  
+99991   11185.0   144824.0  3.520000e+08     0.0  55.0    1   133639.0  
+99992     160.0      851.0  1.610000e+06     0.0  48.0    1      691.0  
+99993     139.0      395.0  1.030000e+06     0.0  40.0    1      256.0  
+99994    1123.0     3344.0  4.240000e+06     0.0  30.0    1     2221.0  
+99995   66844.0   585686.0  3.310000e+08     0.0  60.0    2   518844.0  
+99996  149588.0  1547416.0  9.840000e+08     0.0  80.0    1  1397828.0  
+99997    7637.0    45380.0  4.893000e+07     0.0  85.0    1    37743.0  
+99998   51020.0   364915.0  3.840000e+08     0.0  47.0    1   313895.0  
+99999    3448.0    39353.0  3.536000e+07     0.0  53.0    1    35905.0  
+
+[100000 rows x 24 columns]
+                                        导演    上映年份    整理后剧名
+24328                                Exact  2012.0    爱恨1线牵
+211    John Fawcett Steve Dimarco Paul Fox  2010.0     妖女迷行
+350                         Michael Engler  2013.0  如果还有明天4
+1466                                P'Sant  2012.0    无忧的天堂
+24363                         Phil Abraham  2012.0    广告狂人5
+             评分人数        好评数
+上映年份                        
+1985.0   163064.0   135462.0
+1986.0    58593.0    41216.0
+1987.0  3930018.0  3728651.0
+1988.0   410722.0   337484.0
+1989.0     9357.0     6161.0
+2001年共有49条数据
+           导演    上映年份   整理后剧名        好评数       评分人数
+1338      王冀邢  2001.0      黑冰  1278592.0  1703364.0
+1863      胡明凯  2001.0  少年包青天2  4335522.0  4809919.0
+1027       英达  2001.0   东北1家人  2550233.0  2674339.0
+1972  陈家林、刘大印  2001.0    康熙王朝  3811875.0  4589462.0
+2002年共有74条数据
+          导演    上映年份       整理后剧名         好评数        评分人数
+705      刘家成  2002.0    铁齿铜牙纪晓岚2   3598471.0   4116280.0
+711      张国立  2002.0    康熙微服私访记4   2139569.0   2430093.0
+1813      林龙  2002.0       少年黄飞鸿   3923933.0   4336169.0
+670      梁德龙  2002.0       少年张3丰  42450999.0  48030057.0
+26514    梁本熙  2002.0        大汉天子   2174612.0   2471649.0
+978       欧凡  2002.0      我的淘气天使   3088701.0   3100421.0
+1533      沈庄  2002.0        无敌县令  15840532.0  16449254.0
+179      王文杰  2002.0         大染坊    943441.0   1213903.0
+1118     王重光  2002.0         半生缘   1593117.0   1788765.0
+560      胡雪杨  2002.0        白领公寓   1042170.0   1056247.0
+1026      英达  2002.0     东北1家人续集    783944.0    832767.0
+69       赵宝刚  2002.0  拿什么拯救你我的爱人   1954774.0   2184294.0
+1267   马骁/赵镭  2002.0        乾隆王朝   1519044.0   1807823.0
+542      高力强  2002.0       乌龙闯情关  16282770.0  17787335.0
+2003年共有97条数据
+               导演    上映年份    整理后剧名          好评数         评分人数
+518            丁黑  2003.0      玉观音   10111099.0   10799600.0
+1897          伍宗德  2003.0      双响炮    1108071.0    1122473.0
+2149           何群  2003.0     萍踪侠影    1367926.0    1395491.0
+1733        小多/澄丰  2003.0     少年康熙    1349838.0    1428427.0
+1393          徐庆东  2003.0    重案6组2    8549757.0    9219568.0
+2140  朱德承/余明生/张耀星  2003.0  风流少年唐伯虎   11626244.0   13334067.0
+184           李济昌  2003.0   18岁的天空    1158297.0    1315676.0
+727       李翰韬/王炎冰  2003.0       火帅    1283602.0    1313022.0
+698            沈怡  2003.0     布衣天子    1313230.0    1434892.0
+2148          胡明凯  2003.0    隋唐英雄传    6871162.0    7834399.0
+1537           赖成  2003.0    倚天屠龙记  130354883.0  137252859.0
+2004年共有106条数据
+            导演    上映年份     整理后剧名          好评数         评分人数
+1202        丁黑  2004.0      平淡生活    1800771.0    1890641.0
+2152        何培  2004.0   谍战之特殊较量    2172274.0    2926284.0
+703        刘家成  2004.0  铁齿铜牙纪晓岚3   19826413.0   20693600.0
+1503   周晓文/鞠觉亮  2004.0      天龙8部  249324460.0  257017777.0
+353        张晓光  2004.0      1米阳光    1003363.0    1077617.0
+1636        徐耿  2004.0      小兵张嘎    2873167.0    3438397.0
+317        滕文骥  2004.0      血色浪漫    9838765.0   10652993.0
+26508       董力  2004.0     大汉天子2     961560.0    1093481.0
+536        郭靖宇  2004.0      我非英雄     870254.0    1033558.0
+1150       钱雁秋  2004.0     神探狄仁杰    3988682.0    4543136.0
+2005年共有123条数据
+            导演    上映年份      整理后剧名         好评数        评分人数
+25806       冯凯  2005.0       绿光森林   5576341.0   5896571.0
+1737        刘恒  2005.0  少年天子之顺治王朝   1867984.0   2086341.0
+706        张国立  2005.0       少年嘉庆    933014.0   1013432.0
+1841       张晓光  2005.0       午夜阳光   1467337.0   1807467.0
+2116       张正国  2005.0       后天美女    841319.0    906656.0
+1695       李惠民  2005.0        风云2   5577826.0   6327340.0
+1896       杨文军  2005.0      我爱河东狮   2493475.0   2635663.0
+671         王晶  2005.0    小鱼儿与花无缺    953431.0   1031509.0
+1761       瞿友宁  2005.0      恶作剧之吻   7494951.0   8618136.0
+1905        胡玫  2005.0       汉武大帝   1133144.0   1354595.0
+429         英达  2005.0      地下交通站   9860511.0  10581120.0
+143        赖水清  2005.0    秦王李世民传奇   2811473.0   3074575.0
+718        赖水清  2005.0       刁蛮公主  47325137.0  50604859.0
+930    邓衍成/梁欣全  2005.0       天下第1   3245269.0   3574686.0
+534        郭靖宇  2005.0     刀锋1937   7900251.0   8637909.0
+126        阚卫平  2005.0      大宋提刑官   1808082.0   2089457.0
+2006年共有119条数据
+           导演    上映年份     整理后剧名          好评数         评分人数
+188       丁仰国  2006.0     薛仁贵传奇    4054318.0    4587460.0
+1176       乔梁  2006.0      爱了散了    1355628.0    1590735.0
+2138    于敏/赵箭  2006.0      神雕侠侣   78438716.0   89728495.0
+83    于荣光/黄文利  2006.0       狼毒花    2438527.0    2714823.0
+894       刘逢声  2006.0     楚留香传奇    4458799.0    4512446.0
+198       叶鸿伟  2006.0  会有天使替我爱你    1283288.0    1576509.0
+1319      康洪雷  2006.0      士兵突击    2766981.0    3049742.0
+986     张前/陈健  2006.0        亮剑  114330960.0  123629453.0
+794       张国立  2006.0      济公新传   12964318.0   13553447.0
+16    林清芳/王明台  2006.0    花样少年少女    1767514.0    2009262.0
+1523      梁国冠  2006.0      精卫填海    1594502.0    1782078.0
+1425       澄丰  2006.0      女人不哭    3181067.0    3653253.0
+1738      胡明凯  2006.0    少年包青天3    5025006.0    5365684.0
+1149      钱雁秋  2006.0    神探狄仁杰2    6679585.0    7564279.0
+1120   陈家霖/张敏  2006.0       地下铁    2352788.0    2618582.0
+2007年共有107条数据
+       导演    上映年份      整理后剧名          好评数         评分人数
+1222   尚敬  2007.0    炊事班的故事3    4901011.0    5265527.0
+1595  廖斐鸿  2007.0       终极1家  305682501.0  316121794.0
+318   张建栋  2007.0    我们生活的年代    2172411.0    2189955.0
+20     未知  2007.0     命定之爱国语    1349494.0    1585560.0
+1203   胡坤  2007.0  爱是1颗幸福的子弹    1586200.0    1653974.0
+1100  董志强  2007.0    妈妈再爱我1次    2338169.0    2703607.0
+1958  赵宝刚  2007.0       梅艳芳菲    1618048.0    1711027.0
+142   陈俊良  2007.0    梁山伯与祝英台    1672513.0    1937107.0
+1084  陈家林  2007.0        王昭君    1427373.0    1658803.0
+2008年共有128条数据
+            导演    上映年份   整理后剧名         好评数        评分人数
+1422      乌兰塔娜  2008.0      暖春  19165240.0  19200908.0
+433        于浩威  2008.0      剑谍   2403648.0   2510120.0
+2082       何丽萍  2008.0    宁为女人   3387567.0   4140592.0
+1024       余明生  2008.0    魔幻手机  52814034.0  56579430.0
+726        刘心刚  2008.0   5星大饭店   6086452.0   6239373.0
+1832       刘立立  2008.0    新包青天   5679799.0   6579831.0
+1065    刘逢声/林峰  2008.0   敌营18年   3591638.0   3617351.0
+905    吴锦源/陈国华  2008.0   1千滴眼泪   1814721.0   2485499.0
+991     张新建/孔笙  2008.0     闯关东   2437388.0   2828423.0
+1224       李惠民  2008.0    少林僧兵  19902192.0  20303865.0
+445        王晓明  2008.0     空巷子   1834299.0   1960966.0
+25001       王晶  2008.0   10大奇冤   2801151.0   3002099.0
+987         苏舟  2008.0      红日   2056284.0   2119555.0
+1148       钱雁秋  2008.0  神探狄仁杰3  25205428.0  27291678.0
+2009年共有84条数据
+           导演    上映年份     整理后剧名         好评数        评分人数
+2022       余淳  2009.0      青春舞台   6776805.0   6787007.0
+699   张国立/罗长安  2009.0  铁齿铜牙纪晓岚4   8177111.0   8230880.0
+1394      徐庆东  2009.0     重案6组3  17141887.0  19289721.0
+2139      杨文军  2009.0        暗香  36843941.0  41153667.0
+1785   袁刚/成志超  2009.0       万卷楼  11854390.0  12005965.0
+1727      连奕名  2009.0      中天悬剑   6836408.0   7139122.0
+594       陈伟祥  2009.0    牌坊下的女人   6032685.0   8272572.0
+1970       韦正  2009.0  爱情公寓那些事儿   7277273.0   8186550.0
+2010年共有77条数据
+         导演    上映年份   整理后剧名          好评数         评分人数
+2081    何澍培  2010.0     大丫鬟   51090616.0   51099269.0
+1594  张蠡/姜峰  2010.0    第5空间  210061655.0  214338242.0
+1615    柯翰辰  2010.0   就想爱着你   49013748.0   53007279.0
+1064    柳国庆  2010.0   保姆与保安   15265581.0   15321054.0
+830     江丰宏  2010.0    泡沫之夏  224072795.0  244816854.0
+2013    王加宾  2010.0   11向前冲   37876394.0   39765046.0
+1887    程力栋  2010.0     西游记   18431140.0   18555046.0
+613     谷锦云  2010.0      尖刀   19331419.0   19374945.0
+1171     韦正  2010.0  爱情公寓外传   13617416.0   18102089.0
+514      韦正  2010.0   爱情公寓2  542195824.0  577167954.0
+2011年共有94条数据
+            导演    上映年份     整理后剧名           好评数          评分人数
+1083    于正/李慧珠  2011.0      宫锁心玉  8.586994e+08  9.324091e+08
+1855       付百良  2011.0      女人当官  1.410034e+07  1.673618e+07
+1384        尚敬  2011.0  大学生士兵的故事  3.488127e+07  3.489208e+07
+311         延艺  2011.0   盘龙卧虎高山顶  3.924897e+07  3.934580e+07
+702        张国立  2011.0        养父  1.950149e+07  1.951364e+07
+337        李国立  2011.0      步步惊心  3.408750e+07  3.733689e+07
+284         杨玄  2011.0      千山暮雪  1.547548e+07  1.734464e+07
+1446       林添一  2011.0     回家的诱惑  1.014811e+09  1.014866e+09
+1948   林添一/王伟庭  2011.0     活佛济公2  2.404193e+07  2.711872e+07
+1750        沈怡  2011.0     爱情睡醒了  3.387295e+07  3.727770e+07
+25227       萧锋  2011.0      幸福密码  4.413327e+07  4.413600e+07
+691        黄建中  2011.0   王海涛今年41  1.234235e+08  1.344592e+08
+2012年共有67条数据
+        导演    上映年份    整理后剧名         好评数        评分人数
+1871   张博昱  2012.0    胜女的代价  18701904.0  21273416.0
+1489   张建亚  2012.0     新西游记   9729792.0  11484162.0
+1668   李翰韬  2012.0   太平公主秘史  11888665.0  13857734.0
+26309  林添一  2012.0  薛平贵与王宝钏   6477006.0   7069296.0
+1208   王振宏  2012.0       樱桃   6513878.0   8084382.0
+1369   谷锦云  2012.0     麻辣女兵   9669712.0  10547988.0
+1837   赖水清  2012.0    天涯明月刀  10490442.0  11671479.0
+1380   郭靖宇  2012.0      红娘子   8314314.0   9846816.0
+2013年共有91条数据
+          导演    上映年份    整理后剧名          好评数         评分人数
+912      于正华  2013.0    邻家花美男   11266397.0   12222002.0
+807       刘猛  2013.0  特种兵之火凤凰   63740227.0   72746550.0
+913      姜信孝  2013.0     继承者们   18397819.0   20423276.0
+1824     张太侑  2013.0   来自星星的你  189782635.0  211803173.0
+1354     林建中  2013.0     英雄联盟    6379507.0    7582577.0
+1609  沈怡/周国栋  2013.0    真爱惹麻烦    3762100.0    4437138.0
+1649     赵浚凯  2013.0    武工队传奇    3867390.0    4803930.0
+1444     陶秋普  2013.0       独狼    3555687.0    4859055.0
+2014年共有120条数据
+           导演    上映年份   整理后剧名         好评数        评分人数
+813       侯明杰  2014.0   我的特1营   8609670.0  10393899.0
+745        俞钟  2014.0      绝爱   6453041.0   8264974.0
+1736      刘惠宁  2014.0   相爱10年  15930988.0  20462924.0
+1939      张博昱  2014.0    幸福爱人   9022412.0  11069444.0
+1112      张孝正  2014.0     涛女郎   7252193.0   9383046.0
+1617  曾丽珍/王丽文  2014.0    恋恋不忘  18722585.0  24824510.0
+339       李国立  2014.0  风中奇缘全集  29736130.0  33582919.0
+1553      高翊浚  2014.0   武媚娘传奇  73444480.0  91328299.0
+2015年共有164条数据
+               导演    上映年份    整理后剧名          好评数         评分人数
+2018           俞钟  2015.0  我的媳妇是女王   14224495.0   17072270.0
+98             刘猛  2015.0     特警力量   34765796.0   38965035.0
+1674           孙皓  2015.0   加油吧实习生  175397693.0  198990274.0
+2084      李惠民/白云默  2015.0     多情江山   25256433.0   33151339.0
+2142          林合隆  2015.0  锦绣缘华丽冒险   46376708.0   54482448.0
+2121           林峰  2015.0  少年神探狄仁杰   31894395.0   35482235.0
+1366       滕文骥/王为  2015.0     2胎时代   21156992.0   24608401.0
+1663          潘镜丞  2015.0   冰与火的青春   38431391.0   47471498.0
+1805          王小列  2015.0     神犬小7   76041178.0   82828676.0
+476   陈玉珊/马华干/周晓鹏  2015.0     千金女贼   49943512.0   57678789.0
+1775          陈铭章  2015.0     克拉恋人  256092092.0  301107808.0
+743           黄家辉  2015.0      鸳鸯佩   12909386.0   17827128.0
+2016年共有43条数据
+                导演    上映年份     整理后剧名         好评数        评分人数
+1878           刘俊杰  2016.0   因为爱情有幸福  30790737.0  35075669.0
+282            吴锦源  2016.0   寂寞空庭春欲晚  34573682.0  39880567.0
+983        吴锦源/冯柏源  2016.0      煮妇神探  52276038.0  57826201.0
+769            朱锐斌  2016.0  山海经之赤影传说  31617163.0  36172373.0
+358    林玉芬/高林豹/徐惠康  2016.0     青丘狐传说  35920680.0  41505217.0
+92960      梁胜权/国建勇  2016.0     武神赵子龙  31850186.0  37148312.0
+1123   袁英明/程力栋/国建勇  2016.0     武神赵子龙  31850186.0  37148312.0
+
+    \end{Verbatim}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_1_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_1_2.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+
+    % Add a bibliography block to the postdoc
+    
+    
+    
+    \end{document}
